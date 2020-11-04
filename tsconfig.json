@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "module": "CommonJS",
+    "lib": [
+      "es2019",
+      "DOM"
+    ],
+    "incremental": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "preserveConstEnums": false,
+    "outDir": "build/lib",
+    "sourceMap": true,
+    "inlineSources": false,
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+	},
+	"include": [ "./client/**/*.ts" ],
+}
