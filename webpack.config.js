@@ -3,15 +3,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const outputDirectory = 'dist';
+const outputDirectory = './dist';
+const assets = './assets';
 
 module.exports = {
   entry: './client/index.ts',
-  devtool: "source-map",
+  devtool: 'source-map',
   output: {
     path: path.join(__dirname, outputDirectory),
-    publicPath: '/assets/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: assets
   },
   module: {
     rules: [
