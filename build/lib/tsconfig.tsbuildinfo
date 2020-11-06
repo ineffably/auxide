@@ -166,18 +166,53 @@
         "signature": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
         "affectsGlobalScope": true
       },
+      "../../node_modules/@types/p2/index.d.ts": {
+        "version": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
+        "signature": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
+        "affectsGlobalScope": false
+      },
+      "../../client/_world.ts": {
+        "version": "069e44f967571675a3d93ebbf18eb67879e7507f8aef2cfabcd542c933157ea2",
+        "signature": "3bb4e5354318a4a41f9d6f17a6d2f0340e578ce709f8f2885bec56e6c89d8ce6",
+        "affectsGlobalScope": false
+      },
       "../../node_modules/pixi.js/pixi.js.d.ts": {
         "version": "0b3761f25fd8f8a8b8a3e60679fae9fdc22306e5d42ab65445b16a21217df2aa",
         "signature": "0b3761f25fd8f8a8b8a3e60679fae9fdc22306e5d42ab65445b16a21217df2aa",
         "affectsGlobalScope": true
       },
+      "../../client/assetloader.ts": {
+        "version": "992705a9bf80d55e323faa0a566b36ea99976d2e157e8aee2ac40f28cc0465bc",
+        "signature": "6d1cf1494ac00ed26ebe2ca3648bb2a6e7f5817c737e5a7bfbfacfd634e8418d",
+        "affectsGlobalScope": false
+      },
+      "../../client/clientevents.ts": {
+        "version": "75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": false
+      },
+      "../../client/setuprendering.ts": {
+        "version": "c53cad9fbc7a97550785008f1b4fc83b601a902fdc4e380a7a6ff85f1786e54f",
+        "signature": "e0712343ca23e84b3c7fba150f7c1259c67fe44120a602f582bc4cf2444c1f31",
+        "affectsGlobalScope": false
+      },
+      "../../types.ts": {
+        "version": "e9067ffa2806869df9a3df808482a31bc9987705f3c9a4064fbc24ed31d1477d",
+        "signature": "f84c8146be2d19295c5c66d7520edfb1ccf2e5600828f52295b68a7bd7730f1d",
+        "affectsGlobalScope": false
+      },
+      "../../client/world.ts": {
+        "version": "0ddabe6a23fcf57329b7d79eb93d914ce7967d8ff315bca4fc311a7d7a843ebc",
+        "signature": "0eb5e3e674aacb09e355b7acace0b0bdb7bff6509bf9a1e9fb80371d8c68de6e",
+        "affectsGlobalScope": false
+      },
       "../../client/game.ts": {
-        "version": "849e2ad4a1a763d55732f8193f5c054c8580a4a9e5059004746841efae923607",
-        "signature": "2fe0a23b7c48bb01560f9ce3435feb4cd9693dbce78526b38fe539cd42128ebe",
+        "version": "bb461ef2b32c361e074d09d99e262b97c4585b4fbee2bd5ff2b8ce6db011cac9",
+        "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
       "../../client/ui.tsx": {
-        "version": "9a9365bff93e5446353e70c1fef9df8cc23f4a0624b8c19098ec3c1827306211",
+        "version": "df0ecb3dfd5ab727a81702481c1a49ad899595baf6921e3426d6a37f77f74ae1",
         "signature": "8f3b890bd260826dd9852b3e875b5f6903263eda7bd0dbfd2dbb0bcf05d2c11f",
         "affectsGlobalScope": false
       },
@@ -186,19 +221,9 @@
         "signature": "914fc693fdf835daa9277683d0a00f9621724d0b331466b92ac884518bed97dc",
         "affectsGlobalScope": true
       },
-      "../../client/renderer.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "affectsGlobalScope": false
-      },
-      "../../node_modules/@types/p2/index.d.ts": {
-        "version": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
-        "signature": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
-        "affectsGlobalScope": false
-      },
-      "../../client/world.ts": {
-        "version": "069e44f967571675a3d93ebbf18eb67879e7507f8aef2cfabcd542c933157ea2",
-        "signature": "3bb4e5354318a4a41f9d6f17a6d2f0340e578ce709f8f2885bec56e6c89d8ce6",
+      "../../client/spritesheetviewer.ts": {
+        "version": "f40cb72031914b91fc5beed2a94b4f54e3651dcf89d92532c6d4e7375b704d87",
+        "signature": "c85baab5d290edb477f36e2d55ce11cbd154fca894f261828ef8b9cb44b25a48",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/anymatch/index.d.ts": {
@@ -652,17 +677,32 @@
       "configFilePath": "../../tsconfig.json"
     },
     "referencedMap": {
-      "../../client/game.ts": [
+      "../../client/_world.ts": [
+        "../../node_modules/@types/p2/index.d.ts"
+      ],
+      "../../client/assetloader.ts": [
         "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/game.ts": [
+        "../../client/assetloader.ts",
+        "../../client/setuprendering.ts",
+        "../../client/world.ts"
       ],
       "../../client/index.ts": [
         "../../client/ui.tsx"
+      ],
+      "../../client/setuprendering.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/spritesheetviewer.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts"
       ],
       "../../client/ui.tsx": [
         "../../client/game.ts"
       ],
       "../../client/world.ts": [
-        "../../node_modules/@types/p2/index.d.ts"
+        "../../node_modules/pixi.js/pixi.js.d.ts",
+        "../../types.ts"
       ],
       "../../node_modules/@types/body-parser/index.d.ts": [
         "../../node_modules/@types/connect/index.d.ts",
@@ -970,8 +1010,18 @@
       ]
     },
     "exportedModulesMap": {
-      "../../client/game.ts": [
+      "../../client/assetloader.ts": [
         "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/setuprendering.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/spritesheetviewer.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/world.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts",
+        "../../types.ts"
       ],
       "../../node_modules/@types/body-parser/index.d.ts": [
         "../../node_modules/@types/connect/index.d.ts",
@@ -1279,9 +1329,13 @@
       ]
     },
     "semanticDiagnosticsPerFile": [
+      "../../client/_world.ts",
+      "../../client/assetloader.ts",
+      "../../client/clientevents.ts",
       "../../client/game.ts",
       "../../client/index.ts",
-      "../../client/renderer.ts",
+      "../../client/setuprendering.ts",
+      "../../client/spritesheetviewer.ts",
       "../../client/ui.tsx",
       "../../client/world.ts",
       "../../node_modules/@types/anymatch/index.d.ts",
@@ -1403,7 +1457,8 @@
       "../../node_modules/typescript/lib/lib.es2019.symbol.d.ts",
       "../../node_modules/typescript/lib/lib.es2020.bigint.d.ts",
       "../../node_modules/typescript/lib/lib.es5.d.ts",
-      "../../node_modules/typescript/lib/lib.esnext.intl.d.ts"
+      "../../node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "../../types.ts"
     ]
   },
   "version": "4.0.5"

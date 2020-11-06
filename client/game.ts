@@ -1,29 +1,40 @@
-import * as PIXI from 'pixi.js';
+import { renderer } from './setupRendering';
+import { load } from './assetLoader';
+import { createWorld, updateWorld } from './world';
 
-export const app = new PIXI.Application();
-document.getElementById('root').appendChild(app.view);
+const state = {
+  world: null,
+  startY: 0
+}
 
-const container = new PIXI.Container();
-app.stage.addChild(container);
+const clientEvents = () => {
+  document.onwheel = (event) => {
+    state.startY += event.deltaY;
+  };
+}
 
-app.stop(); 
+async function init(): Promise<void> {
+  clientEvents();
+  const loader = await load();
+  state.world = createWorld(loader);
+  requestAnimationFrame(gameloop);
+}
 
-app.loader
-    .add('topdown', '/assets/topdown.json')
-    .load(() => {
-      console.log(app);
-    });
+let lastTime = Date.now();
+function gameloop() {
+  const now = Date.now();
+  let deltaTime = now - lastTime;
+  lastTime = now;
+  if (deltaTime < 0) deltaTime = 0;
+  if (deltaTime > 1000) deltaTime = 1000;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const deltaFrame = (deltaTime * 60) / 1000;
+  updateWorld(state);
+  renderer.render(state.world.stage);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  requestAnimationFrame(gameloop);
+}
 
-
-
-
-// PIXI.Loader.shared.add("sprites/spritesheet.json")
-//     .load(spriteSetup)
-//     .load(startup);
-
-// function spriteSetup(){
-//     sheet = PIXI.Loader.shared.resources["sprites/spritesheet.json"].spritesheet;
-// }
-// function startup(){
-//     bunny = new PIXI.Sprite(sheet.textures["bunny.png"]);
-// }
+export {
+  init
+}

@@ -19,8 +19,10 @@
   "license": "ISC",
   "devDependencies": {
     "@types/p2": "^0.7.36",
-    "@types/pixi.js": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
     "cors": "^2.8.5",
+    "eslint": "^7.12.1",
     "express": "^4.17.1",
     "fork-ts-checker-webpack-plugin": "^5.2.1",
     "html-webpack-plugin": "^4.5.0",

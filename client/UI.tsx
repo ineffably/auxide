@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { app } from './game';
+import { init } from './game';
 
 export const ui = () => {
   useEffect(() => {
-    console.log(app);
+    init();
   })
   
   return(
-    <div>User Interface</div>
+    <div/>
   )
 }
