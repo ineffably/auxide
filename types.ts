@@ -3,3 +3,9 @@ export interface SpriteEntry {
   name: string;
   text: PIXI.Text;
 }
+
+export interface GameTime {
+  deltaTime: number;
+  deltaFrame: number;
+}
+

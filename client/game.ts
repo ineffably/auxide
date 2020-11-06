@@ -1,37 +1,42 @@
 import { renderer } from './setupRendering';
 import { load } from './assetLoader';
-import { createWorld, updateWorld } from './world';
-
-const state = {
-  world: null,
-  startY: 0
-}
+import { createWorld, updateWorld, state, stage } from './world';
 
 const clientEvents = () => {
-  document.onwheel = (event) => {
-    state.startY += event.deltaY;
+  // document.onwheel = (event) => {
+  //   state.startY += event.deltaY;
+  // };
+  document.onkeydown = (event) => {
+    state.keyDownEvent = event;
   };
 }
 
 async function init(): Promise<void> {
   clientEvents();
+  console.log('loader-start');
   const loader = await load();
-  state.world = createWorld(loader);
+  console.log('loader-end');
+  const { world, sprites } = createWorld(loader);
+  state.world = world;
+  state.sprites = sprites;
   requestAnimationFrame(gameloop);
 }
 
-let lastTime = Date.now();
-function gameloop() {
-  const now = Date.now();
-  let deltaTime = now - lastTime;
-  lastTime = now;
-  if (deltaTime < 0) deltaTime = 0;
-  if (deltaTime > 1000) deltaTime = 1000;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const deltaFrame = (deltaTime * 60) / 1000;
+const fixedTimeStep = 1 / 60;
+const maxSubSteps = 10;
+let lastTimeMilliseconds = 0;
+function gameloop(timeMilliseconds) {
+  let timeSinceLastCall = 0;
+  if(timeMilliseconds !== undefined && lastTimeMilliseconds !== undefined){
+      timeSinceLastCall = (timeMilliseconds - lastTimeMilliseconds) / 1000;
+  }
+  state.world.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
+  lastTimeMilliseconds = timeMilliseconds;
+
   updateWorld(state);
-  renderer.render(state.world.stage);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  if(stage){
+    renderer.render(stage);
+  }
   requestAnimationFrame(gameloop);
 }
 

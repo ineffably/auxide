@@ -34,7 +34,7 @@ const createWorld = () => {
   // let text = new PIXI.Text('This is a PixiJS text',{fontFamily : 'Arial', fontSize: 24, fill : 0xff1010, align : 'center'});
   if (spritesheet) {
     const { textures } = spritesheet;
-    Object.keys(textures).forEach((name, i) => {
+    Object.keys(textures).forEach(name => {
       const sprite = new PIXI.Sprite(textures[name]);
       const text = new PIXI.Text(name, { fill: 0xffffff, fontSize: 24 });
       text.position.x = 74;
@@ -61,6 +61,7 @@ const gameloop = () => {
   lastTime = now;
   if (deltaTime < 0) deltaTime = 0;
   if (deltaTime > 1000) deltaTime = 1000;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const deltaFrame = (deltaTime * 60) / 1000;
   updateWorld();
   renderer.render(stage);
