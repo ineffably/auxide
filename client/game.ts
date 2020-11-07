@@ -31,8 +31,8 @@ async function init(): Promise<void> {
 
 function gameloop(timeMill) {
   const { gameWorld, spritesheet } = localState;
-  const { state, world } = gameWorld;
-  const { stage } = state;
+  const { state } = gameWorld;
+  const { stage, world } = state;
 
   if(stage){
     renderer({world, spritesheet, stage});

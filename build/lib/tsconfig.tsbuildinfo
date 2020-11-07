@@ -192,8 +192,8 @@
         "affectsGlobalScope": false
       },
       "../../client/world.ts": {
-        "version": "1c3db3f388f10f6e2f7442437c09ff855e6aa4a150987a36323802da128f0fcd",
-        "signature": "4e6b837049f5c8e88e7241460bc9451e83b6ea286b416ae1484e409938518654",
+        "version": "aa2716f341879697a798c91b1dd209a7217fed8eee63774a56f51a416d4ec707",
+        "signature": "45d5027ba0b404b59965c92f9c2f66018214ae381ceea55ae5d414882a3031a1",
         "affectsGlobalScope": false
       },
       "../../client/worldrenderer.ts": {
@@ -202,7 +202,7 @@
         "affectsGlobalScope": false
       },
       "../../client/game.ts": {
-        "version": "aad691cf41dba29d81bc7406d8c8dccd73fd68cdb15c1226b4f5932b0983d6d4",
+        "version": "76ae710a68e2a187f768300b3821fdcbc0eea89aa54b2a42868a8649c1d6878d",
         "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
