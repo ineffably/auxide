@@ -197,7 +197,7 @@
         "affectsGlobalScope": false
       },
       "../../client/world.ts": {
-        "version": "06ab39b1940d8c6d51a1136767ee5adf638af43fc3ab39d1c31d3d864342fa30",
+        "version": "1c6c4a7ca3d6ad2e2c7d373950379b5257241693560fd091e70bf94e84b8f69b",
         "signature": "2633338fdb09e7997014d9fa3fbe69c6c639a167f99ea4b5a262ad0a041e8cb7",
         "affectsGlobalScope": false
       },
