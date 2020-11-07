@@ -171,38 +171,38 @@
         "signature": "0b3761f25fd8f8a8b8a3e60679fae9fdc22306e5d42ab65445b16a21217df2aa",
         "affectsGlobalScope": true
       },
-      "../../types.ts": {
-        "version": "b8320aa40fd9ca0fc3d77fce1d5c634d086f2c591fce6a8d4c1268375ee2272b",
-        "signature": "162e96b0a9a65ae89289478b116b15b02aa9b43be52428405cbf08cd1cc09ea3",
-        "affectsGlobalScope": false
-      },
-      "../../client/_pixi-world.ts": {
-        "version": "cf621aa4d7ce6305e8b6b07fdd82dc31b4bbf70ac4819c0e22846ad3f9afd00f",
-        "signature": "f9e1e047eb82b119be2d96ef94869fb226e1762b814355cefbb2664099471781",
-        "affectsGlobalScope": false
-      },
       "../../client/assetloader.ts": {
         "version": "992705a9bf80d55e323faa0a566b36ea99976d2e157e8aee2ac40f28cc0465bc",
         "signature": "6d1cf1494ac00ed26ebe2ca3648bb2a6e7f5817c737e5a7bfbfacfd634e8418d",
         "affectsGlobalScope": false
       },
-      "../../client/setuprendering.ts": {
-        "version": "c53cad9fbc7a97550785008f1b4fc83b601a902fdc4e380a7a6ff85f1786e54f",
-        "signature": "e0712343ca23e84b3c7fba150f7c1259c67fe44120a602f582bc4cf2444c1f31",
+      "../../client/setuprendersurface.ts": {
+        "version": "9f84c0dd94afda9e7c843c6b3c4d09f89908bb2ae9b833736aa88796a9f5cec6",
+        "signature": "c2ff78eea77ebeb1c09384671d815e266ec2c0d61052c512b8ee29baec8b2fc7",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/p2/index.d.ts": {
-        "version": "a845fe0bd656765f0d9e56cc626531b869b0b5cb996f8d701a3f53c983207790",
-        "signature": "a845fe0bd656765f0d9e56cc626531b869b0b5cb996f8d701a3f53c983207790",
+        "version": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
+        "signature": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
+        "affectsGlobalScope": false
+      },
+      "../../types.ts": {
+        "version": "f2c6c3880bc2642aeab17b908e47f4a95336fc1e23a4823c4e0c4f2fee3a71eb",
+        "signature": "0556c2cc4a2d78552ac27de799e512d26c50cff018ce68bc95c8d2a18706a3da",
         "affectsGlobalScope": false
       },
       "../../client/world.ts": {
-        "version": "1c6c4a7ca3d6ad2e2c7d373950379b5257241693560fd091e70bf94e84b8f69b",
-        "signature": "2633338fdb09e7997014d9fa3fbe69c6c639a167f99ea4b5a262ad0a041e8cb7",
+        "version": "1c3db3f388f10f6e2f7442437c09ff855e6aa4a150987a36323802da128f0fcd",
+        "signature": "4e6b837049f5c8e88e7241460bc9451e83b6ea286b416ae1484e409938518654",
+        "affectsGlobalScope": false
+      },
+      "../../client/worldrenderer.ts": {
+        "version": "f3872104e93675880a528864764241b995df1082999214913b867ef134025af3",
+        "signature": "b9cc5a9d1da7e6fcc6d7a1e4b6e5e90c5707911959bf0fdfb80e4d22f072e4f5",
         "affectsGlobalScope": false
       },
       "../../client/game.ts": {
-        "version": "db2d018f532f097c00ee00369ca4852beae01e338aaa8304f78c7afd51ef022e",
+        "version": "aad691cf41dba29d81bc7406d8c8dccd73fd68cdb15c1226b4f5932b0983d6d4",
         "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
@@ -212,7 +212,7 @@
         "affectsGlobalScope": false
       },
       "../../client/ui.tsx": {
-        "version": "df0ecb3dfd5ab727a81702481c1a49ad899595baf6921e3426d6a37f77f74ae1",
+        "version": "15dba9a9b5d3314008129b568a0c4375a9b49c0c0dbb5e21b9b81fd3814e3858",
         "signature": "8f3b890bd260826dd9852b3e875b5f6903263eda7bd0dbfd2dbb0bcf05d2c11f",
         "affectsGlobalScope": false
       },
@@ -682,17 +682,15 @@
       "configFilePath": "../../tsconfig.json"
     },
     "referencedMap": {
-      "../../client/_pixi-world.ts": [
-        "../../node_modules/pixi.js/pixi.js.d.ts",
-        "../../types.ts"
-      ],
       "../../client/assetloader.ts": [
         "../../node_modules/pixi.js/pixi.js.d.ts"
       ],
       "../../client/game.ts": [
         "../../client/assetloader.ts",
-        "../../client/setuprendering.ts",
-        "../../client/world.ts"
+        "../../client/setuprendersurface.ts",
+        "../../client/world.ts",
+        "../../client/worldrenderer.ts",
+        "../../node_modules/pixi.js/pixi.js.d.ts"
       ],
       "../../client/gametime.ts": [
         "../../types.ts"
@@ -700,7 +698,7 @@
       "../../client/index.ts": [
         "../../client/ui.tsx"
       ],
-      "../../client/setuprendering.ts": [
+      "../../client/setuprendersurface.ts": [
         "../../node_modules/pixi.js/pixi.js.d.ts"
       ],
       "../../client/spritesheetviewer.ts": [
@@ -714,329 +712,7 @@
         "../../node_modules/pixi.js/pixi.js.d.ts",
         "../../types.ts"
       ],
-      "../../node_modules/@types/body-parser/index.d.ts": [
-        "../../node_modules/@types/connect/index.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/index.d.ts"
-      ],
-      "../../node_modules/@types/connect/index.d.ts": [
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/index.d.ts"
-      ],
-      "../../node_modules/@types/eslint-scope/index.d.ts": [
-        "../../node_modules/@types/eslint/index.d.ts",
-        "../../node_modules/@types/estree/index.d.ts"
-      ],
-      "../../node_modules/@types/eslint/index.d.ts": [
-        "../../node_modules/@types/eslint/helpers.d.ts",
-        "../../node_modules/@types/estree/index.d.ts",
-        "../../node_modules/@types/json-schema/index.d.ts"
-      ],
-      "../../node_modules/@types/express-serve-static-core/index.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/index.d.ts",
-        "../../node_modules/@types/qs/index.d.ts",
-        "../../node_modules/@types/range-parser/index.d.ts"
-      ],
-      "../../node_modules/@types/express/index.d.ts": [
-        "../../node_modules/@types/body-parser/index.d.ts",
-        "../../node_modules/@types/express-serve-static-core/index.d.ts",
-        "../../node_modules/@types/qs/index.d.ts",
-        "../../node_modules/@types/serve-static/index.d.ts"
-      ],
-      "../../node_modules/@types/glob/index.d.ts": [
-        "../../node_modules/@types/minimatch/index.d.ts",
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/index.d.ts"
-      ],
-      "../../node_modules/@types/node/base.d.ts": [
-        "../../node_modules/@types/node/assert.d.ts",
-        "../../node_modules/@types/node/ts3.6/base.d.ts"
-      ],
-      "../../node_modules/@types/node/child_process.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/net.d.ts",
-        "../../node_modules/@types/node/stream.d.ts"
-      ],
-      "../../node_modules/@types/node/cluster.d.ts": [
-        "../../node_modules/@types/node/child_process.d.ts",
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/net.d.ts"
-      ],
-      "../../node_modules/@types/node/console.d.ts": [
-        "../../node_modules/@types/node/util.d.ts"
-      ],
-      "../../node_modules/@types/node/constants.d.ts": [
-        "../../node_modules/@types/node/crypto.d.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/os.d.ts"
-      ],
-      "../../node_modules/@types/node/crypto.d.ts": [
-        "../../node_modules/@types/node/stream.d.ts"
-      ],
-      "../../node_modules/@types/node/dgram.d.ts": [
-        "../../node_modules/@types/node/dns.d.ts",
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/net.d.ts"
-      ],
-      "../../node_modules/@types/node/domain.d.ts": [
-        "../../node_modules/@types/node/events.d.ts"
-      ],
-      "../../node_modules/@types/node/fs.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/fs/promises.d.ts",
-        "../../node_modules/@types/node/stream.d.ts",
-        "../../node_modules/@types/node/url.d.ts"
-      ],
-      "../../node_modules/@types/node/fs/promises.d.ts": [
-        "../../node_modules/@types/node/fs.d.ts"
-      ],
-      "../../node_modules/@types/node/http.d.ts": [
-        "../../node_modules/@types/node/net.d.ts",
-        "../../node_modules/@types/node/stream.d.ts",
-        "../../node_modules/@types/node/url.d.ts"
-      ],
-      "../../node_modules/@types/node/http2.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/net.d.ts",
-        "../../node_modules/@types/node/stream.d.ts",
-        "../../node_modules/@types/node/tls.d.ts",
-        "../../node_modules/@types/node/url.d.ts"
-      ],
-      "../../node_modules/@types/node/https.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/tls.d.ts",
-        "../../node_modules/@types/node/url.d.ts"
-      ],
-      "../../node_modules/@types/node/index.d.ts": [
-        "../../node_modules/@types/node/base.d.ts"
-      ],
-      "../../node_modules/@types/node/inspector.d.ts": [
-        "../../node_modules/@types/node/events.d.ts"
-      ],
-      "../../node_modules/@types/node/module.d.ts": [
-        "../../node_modules/@types/node/url.d.ts"
-      ],
-      "../../node_modules/@types/node/net.d.ts": [
-        "../../node_modules/@types/node/dns.d.ts",
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/stream.d.ts"
-      ],
-      "../../node_modules/@types/node/perf_hooks.d.ts": [
-        "../../node_modules/@types/node/async_hooks.d.ts"
-      ],
-      "../../node_modules/@types/node/process.d.ts": [
-        "../../node_modules/@types/node/tty.d.ts"
-      ],
-      "../../node_modules/@types/node/readline.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/stream.d.ts"
-      ],
-      "../../node_modules/@types/node/repl.d.ts": [
-        "../../node_modules/@types/node/readline.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/vm.d.ts"
-      ],
-      "../../node_modules/@types/node/stream.d.ts": [
-        "../../node_modules/@types/node/events.d.ts"
-      ],
-      "../../node_modules/@types/node/tls.d.ts": [
-        "../../node_modules/@types/node/crypto.d.ts",
-        "../../node_modules/@types/node/dns.d.ts",
-        "../../node_modules/@types/node/net.d.ts",
-        "../../node_modules/@types/node/stream.d.ts"
-      ],
-      "../../node_modules/@types/node/ts3.4/base.d.ts": [
-        "../../node_modules/@types/node/async_hooks.d.ts",
-        "../../node_modules/@types/node/buffer.d.ts",
-        "../../node_modules/@types/node/child_process.d.ts",
-        "../../node_modules/@types/node/cluster.d.ts",
-        "../../node_modules/@types/node/console.d.ts",
-        "../../node_modules/@types/node/constants.d.ts",
-        "../../node_modules/@types/node/crypto.d.ts",
-        "../../node_modules/@types/node/dgram.d.ts",
-        "../../node_modules/@types/node/dns.d.ts",
-        "../../node_modules/@types/node/domain.d.ts",
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/fs/promises.d.ts",
-        "../../node_modules/@types/node/globals.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/http2.d.ts",
-        "../../node_modules/@types/node/https.d.ts",
-        "../../node_modules/@types/node/inspector.d.ts",
-        "../../node_modules/@types/node/module.d.ts",
-        "../../node_modules/@types/node/net.d.ts",
-        "../../node_modules/@types/node/os.d.ts",
-        "../../node_modules/@types/node/path.d.ts",
-        "../../node_modules/@types/node/perf_hooks.d.ts",
-        "../../node_modules/@types/node/process.d.ts",
-        "../../node_modules/@types/node/punycode.d.ts",
-        "../../node_modules/@types/node/querystring.d.ts",
-        "../../node_modules/@types/node/readline.d.ts",
-        "../../node_modules/@types/node/repl.d.ts",
-        "../../node_modules/@types/node/stream.d.ts",
-        "../../node_modules/@types/node/string_decoder.d.ts",
-        "../../node_modules/@types/node/timers.d.ts",
-        "../../node_modules/@types/node/tls.d.ts",
-        "../../node_modules/@types/node/trace_events.d.ts",
-        "../../node_modules/@types/node/tty.d.ts",
-        "../../node_modules/@types/node/url.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/v8.d.ts",
-        "../../node_modules/@types/node/vm.d.ts",
-        "../../node_modules/@types/node/worker_threads.d.ts",
-        "../../node_modules/@types/node/zlib.d.ts"
-      ],
-      "../../node_modules/@types/node/ts3.6/base.d.ts": [
-        "../../node_modules/@types/node/globals.global.d.ts",
-        "../../node_modules/@types/node/ts3.4/base.d.ts",
-        "../../node_modules/@types/node/wasi.d.ts"
-      ],
-      "../../node_modules/@types/node/tty.d.ts": [
-        "../../node_modules/@types/node/net.d.ts"
-      ],
-      "../../node_modules/@types/node/url.d.ts": [
-        "../../node_modules/@types/node/querystring.d.ts"
-      ],
-      "../../node_modules/@types/node/v8.d.ts": [
-        "../../node_modules/@types/node/stream.d.ts"
-      ],
-      "../../node_modules/@types/node/worker_threads.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/fs/promises.d.ts",
-        "../../node_modules/@types/node/stream.d.ts",
-        "../../node_modules/@types/node/url.d.ts",
-        "../../node_modules/@types/node/vm.d.ts"
-      ],
-      "../../node_modules/@types/node/zlib.d.ts": [
-        "../../node_modules/@types/node/stream.d.ts"
-      ],
-      "../../node_modules/@types/serve-static/index.d.ts": [
-        "../../node_modules/@types/mime/index.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/index.d.ts"
-      ],
-      "../../node_modules/@types/uglify-js/index.d.ts": [
-        "../../node_modules/source-map/source-map.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/index.d.ts": [
-        "../../node_modules/@types/node/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/cachedsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/compatsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/concatsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/originalsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/prefixsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/rawsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/replacesource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/sizeonlysource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/sourcemapsource.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/cachedsource.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
-        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/compatsource.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/concatsource.d.ts": [
-        "../../node_modules/@types/source-list-map/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
-        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/index.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/cachedsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/compatsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/concatsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/originalsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/prefixsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/rawsource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/replacesource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/sizeonlysource.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/sourcemapsource.d.ts",
-        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/originalsource.d.ts": [
-        "../../node_modules/@types/source-list-map/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
-        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/prefixsource.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/rawsource.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/replacesource.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/sizeonlysource.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/source.d.ts": [
-        "../../node_modules/@types/node/crypto.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
-      ],
-      "../../node_modules/@types/webpack-sources/lib/sourcemapsource.d.ts": [
-        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
-        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
-        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
-      ],
-      "../../node_modules/@types/webpack/index.d.ts": [
-        "../../node_modules/@types/anymatch/index.d.ts",
-        "../../node_modules/@types/node/crypto.d.ts",
-        "../../node_modules/@types/node/index.d.ts",
-        "../../node_modules/@types/uglify-js/index.d.ts",
-        "../../node_modules/@types/webpack-sources/index.d.ts",
-        "../../node_modules/source-map/source-map.d.ts",
-        "../../node_modules/tapable/tapable.d.ts"
-      ],
-      "../../node_modules/@types/ws/index.d.ts": [
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/https.d.ts",
-        "../../node_modules/@types/node/index.d.ts",
-        "../../node_modules/@types/node/net.d.ts",
-        "../../node_modules/@types/node/stream.d.ts",
-        "../../node_modules/@types/node/tls.d.ts",
-        "../../node_modules/@types/node/url.d.ts",
-        "../../node_modules/@types/node/zlib.d.ts"
-      ]
-    },
-    "exportedModulesMap": {
-      "../../client/_pixi-world.ts": [
-        "../../node_modules/pixi.js/pixi.js.d.ts",
-        "../../types.ts"
-      ],
-      "../../client/assetloader.ts": [
-        "../../node_modules/pixi.js/pixi.js.d.ts"
-      ],
-      "../../client/gametime.ts": [
-        "../../types.ts"
-      ],
-      "../../client/setuprendering.ts": [
-        "../../node_modules/pixi.js/pixi.js.d.ts"
-      ],
-      "../../client/spritesheetviewer.ts": [
-        "../../node_modules/pixi.js/pixi.js.d.ts"
-      ],
-      "../../client/world.ts": [
+      "../../client/worldrenderer.ts": [
         "../../node_modules/@types/p2/index.d.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts",
         "../../types.ts"
@@ -1344,19 +1020,352 @@
         "../../node_modules/@types/node/tls.d.ts",
         "../../node_modules/@types/node/url.d.ts",
         "../../node_modules/@types/node/zlib.d.ts"
+      ],
+      "../../types.ts": [
+        "../../node_modules/@types/p2/index.d.ts"
+      ]
+    },
+    "exportedModulesMap": {
+      "../../client/assetloader.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/gametime.ts": [
+        "../../types.ts"
+      ],
+      "../../client/setuprendersurface.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/spritesheetviewer.ts": [
+        "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../client/world.ts": [
+        "../../node_modules/@types/p2/index.d.ts",
+        "../../node_modules/pixi.js/pixi.js.d.ts",
+        "../../types.ts"
+      ],
+      "../../client/worldrenderer.ts": [
+        "../../node_modules/@types/p2/index.d.ts",
+        "../../node_modules/pixi.js/pixi.js.d.ts"
+      ],
+      "../../node_modules/@types/body-parser/index.d.ts": [
+        "../../node_modules/@types/connect/index.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/index.d.ts"
+      ],
+      "../../node_modules/@types/connect/index.d.ts": [
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/index.d.ts"
+      ],
+      "../../node_modules/@types/eslint-scope/index.d.ts": [
+        "../../node_modules/@types/eslint/index.d.ts",
+        "../../node_modules/@types/estree/index.d.ts"
+      ],
+      "../../node_modules/@types/eslint/index.d.ts": [
+        "../../node_modules/@types/eslint/helpers.d.ts",
+        "../../node_modules/@types/estree/index.d.ts",
+        "../../node_modules/@types/json-schema/index.d.ts"
+      ],
+      "../../node_modules/@types/express-serve-static-core/index.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/index.d.ts",
+        "../../node_modules/@types/qs/index.d.ts",
+        "../../node_modules/@types/range-parser/index.d.ts"
+      ],
+      "../../node_modules/@types/express/index.d.ts": [
+        "../../node_modules/@types/body-parser/index.d.ts",
+        "../../node_modules/@types/express-serve-static-core/index.d.ts",
+        "../../node_modules/@types/qs/index.d.ts",
+        "../../node_modules/@types/serve-static/index.d.ts"
+      ],
+      "../../node_modules/@types/glob/index.d.ts": [
+        "../../node_modules/@types/minimatch/index.d.ts",
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/index.d.ts"
+      ],
+      "../../node_modules/@types/node/base.d.ts": [
+        "../../node_modules/@types/node/assert.d.ts",
+        "../../node_modules/@types/node/ts3.6/base.d.ts"
+      ],
+      "../../node_modules/@types/node/child_process.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/node/cluster.d.ts": [
+        "../../node_modules/@types/node/child_process.d.ts",
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/net.d.ts"
+      ],
+      "../../node_modules/@types/node/console.d.ts": [
+        "../../node_modules/@types/node/util.d.ts"
+      ],
+      "../../node_modules/@types/node/constants.d.ts": [
+        "../../node_modules/@types/node/crypto.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/os.d.ts"
+      ],
+      "../../node_modules/@types/node/crypto.d.ts": [
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/node/dgram.d.ts": [
+        "../../node_modules/@types/node/dns.d.ts",
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/net.d.ts"
+      ],
+      "../../node_modules/@types/node/domain.d.ts": [
+        "../../node_modules/@types/node/events.d.ts"
+      ],
+      "../../node_modules/@types/node/fs.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/fs/promises.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/url.d.ts"
+      ],
+      "../../node_modules/@types/node/fs/promises.d.ts": [
+        "../../node_modules/@types/node/fs.d.ts"
+      ],
+      "../../node_modules/@types/node/http.d.ts": [
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/url.d.ts"
+      ],
+      "../../node_modules/@types/node/http2.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/tls.d.ts",
+        "../../node_modules/@types/node/url.d.ts"
+      ],
+      "../../node_modules/@types/node/https.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/tls.d.ts",
+        "../../node_modules/@types/node/url.d.ts"
+      ],
+      "../../node_modules/@types/node/index.d.ts": [
+        "../../node_modules/@types/node/base.d.ts"
+      ],
+      "../../node_modules/@types/node/inspector.d.ts": [
+        "../../node_modules/@types/node/events.d.ts"
+      ],
+      "../../node_modules/@types/node/module.d.ts": [
+        "../../node_modules/@types/node/url.d.ts"
+      ],
+      "../../node_modules/@types/node/net.d.ts": [
+        "../../node_modules/@types/node/dns.d.ts",
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/node/perf_hooks.d.ts": [
+        "../../node_modules/@types/node/async_hooks.d.ts"
+      ],
+      "../../node_modules/@types/node/process.d.ts": [
+        "../../node_modules/@types/node/tty.d.ts"
+      ],
+      "../../node_modules/@types/node/readline.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/node/repl.d.ts": [
+        "../../node_modules/@types/node/readline.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/vm.d.ts"
+      ],
+      "../../node_modules/@types/node/stream.d.ts": [
+        "../../node_modules/@types/node/events.d.ts"
+      ],
+      "../../node_modules/@types/node/tls.d.ts": [
+        "../../node_modules/@types/node/crypto.d.ts",
+        "../../node_modules/@types/node/dns.d.ts",
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/node/ts3.4/base.d.ts": [
+        "../../node_modules/@types/node/async_hooks.d.ts",
+        "../../node_modules/@types/node/buffer.d.ts",
+        "../../node_modules/@types/node/child_process.d.ts",
+        "../../node_modules/@types/node/cluster.d.ts",
+        "../../node_modules/@types/node/console.d.ts",
+        "../../node_modules/@types/node/constants.d.ts",
+        "../../node_modules/@types/node/crypto.d.ts",
+        "../../node_modules/@types/node/dgram.d.ts",
+        "../../node_modules/@types/node/dns.d.ts",
+        "../../node_modules/@types/node/domain.d.ts",
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/fs/promises.d.ts",
+        "../../node_modules/@types/node/globals.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/http2.d.ts",
+        "../../node_modules/@types/node/https.d.ts",
+        "../../node_modules/@types/node/inspector.d.ts",
+        "../../node_modules/@types/node/module.d.ts",
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/os.d.ts",
+        "../../node_modules/@types/node/path.d.ts",
+        "../../node_modules/@types/node/perf_hooks.d.ts",
+        "../../node_modules/@types/node/process.d.ts",
+        "../../node_modules/@types/node/punycode.d.ts",
+        "../../node_modules/@types/node/querystring.d.ts",
+        "../../node_modules/@types/node/readline.d.ts",
+        "../../node_modules/@types/node/repl.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/string_decoder.d.ts",
+        "../../node_modules/@types/node/timers.d.ts",
+        "../../node_modules/@types/node/tls.d.ts",
+        "../../node_modules/@types/node/trace_events.d.ts",
+        "../../node_modules/@types/node/tty.d.ts",
+        "../../node_modules/@types/node/url.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/v8.d.ts",
+        "../../node_modules/@types/node/vm.d.ts",
+        "../../node_modules/@types/node/worker_threads.d.ts",
+        "../../node_modules/@types/node/zlib.d.ts"
+      ],
+      "../../node_modules/@types/node/ts3.6/base.d.ts": [
+        "../../node_modules/@types/node/globals.global.d.ts",
+        "../../node_modules/@types/node/ts3.4/base.d.ts",
+        "../../node_modules/@types/node/wasi.d.ts"
+      ],
+      "../../node_modules/@types/node/tty.d.ts": [
+        "../../node_modules/@types/node/net.d.ts"
+      ],
+      "../../node_modules/@types/node/url.d.ts": [
+        "../../node_modules/@types/node/querystring.d.ts"
+      ],
+      "../../node_modules/@types/node/v8.d.ts": [
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/node/worker_threads.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/fs/promises.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/url.d.ts",
+        "../../node_modules/@types/node/vm.d.ts"
+      ],
+      "../../node_modules/@types/node/zlib.d.ts": [
+        "../../node_modules/@types/node/stream.d.ts"
+      ],
+      "../../node_modules/@types/serve-static/index.d.ts": [
+        "../../node_modules/@types/mime/index.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/index.d.ts"
+      ],
+      "../../node_modules/@types/uglify-js/index.d.ts": [
+        "../../node_modules/source-map/source-map.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/index.d.ts": [
+        "../../node_modules/@types/node/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/cachedsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/compatsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/concatsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/originalsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/prefixsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/rawsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/replacesource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/sizeonlysource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/sourcemapsource.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/cachedsource.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
+        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/compatsource.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/concatsource.d.ts": [
+        "../../node_modules/@types/source-list-map/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
+        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/index.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/cachedsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/compatsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/concatsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/originalsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/prefixsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/rawsource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/replacesource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/sizeonlysource.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/sourcemapsource.d.ts",
+        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/originalsource.d.ts": [
+        "../../node_modules/@types/source-list-map/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
+        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/prefixsource.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/rawsource.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/replacesource.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/sizeonlysource.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/source.d.ts": [
+        "../../node_modules/@types/node/crypto.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
+      ],
+      "../../node_modules/@types/webpack-sources/lib/sourcemapsource.d.ts": [
+        "../../node_modules/@types/webpack-sources/lib/index.d.ts",
+        "../../node_modules/@types/webpack-sources/lib/source.d.ts",
+        "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts"
+      ],
+      "../../node_modules/@types/webpack/index.d.ts": [
+        "../../node_modules/@types/anymatch/index.d.ts",
+        "../../node_modules/@types/node/crypto.d.ts",
+        "../../node_modules/@types/node/index.d.ts",
+        "../../node_modules/@types/uglify-js/index.d.ts",
+        "../../node_modules/@types/webpack-sources/index.d.ts",
+        "../../node_modules/source-map/source-map.d.ts",
+        "../../node_modules/tapable/tapable.d.ts"
+      ],
+      "../../node_modules/@types/ws/index.d.ts": [
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/https.d.ts",
+        "../../node_modules/@types/node/index.d.ts",
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/tls.d.ts",
+        "../../node_modules/@types/node/url.d.ts",
+        "../../node_modules/@types/node/zlib.d.ts"
+      ],
+      "../../types.ts": [
+        "../../node_modules/@types/p2/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
-      "../../client/_pixi-world.ts",
       "../../client/assetloader.ts",
       "../../client/game.ts",
       "../../client/gametime.ts",
       "../../client/index.ts",
       "../../client/player.ts",
-      "../../client/setuprendering.ts",
+      "../../client/setuprendersurface.ts",
       "../../client/spritesheetviewer.ts",
       "../../client/ui.tsx",
       "../../client/world.ts",
+      "../../client/worldrenderer.ts",
       "../../node_modules/@types/anymatch/index.d.ts",
       "../../node_modules/@types/body-parser/index.d.ts",
       "../../node_modules/@types/connect/index.d.ts",

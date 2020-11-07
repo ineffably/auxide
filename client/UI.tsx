@@ -6,7 +6,5 @@ export const ui = () => {
     init();
   })
   
-  return(
-    <div/>
-  )
+  return(<div/>);
 }
