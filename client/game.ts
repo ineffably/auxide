@@ -13,9 +13,7 @@ const clientEvents = () => {
 
 async function init(): Promise<void> {
   clientEvents();
-  console.log('loader-start');
   const loader = await load();
-  console.log('loader-end');
   const { world, sprites } = createWorld(loader);
   state.world = world;
   state.sprites = sprites;
@@ -24,14 +22,15 @@ async function init(): Promise<void> {
 
 const fixedTimeStep = 1 / 60;
 const maxSubSteps = 10;
-let lastTimeMilliseconds = 0;
-function gameloop(timeMilliseconds) {
-  let timeSinceLastCall = 0;
-  if(timeMilliseconds !== undefined && lastTimeMilliseconds !== undefined){
-      timeSinceLastCall = (timeMilliseconds - lastTimeMilliseconds) / 1000;
+let lastTimeMs = 0;
+const rate = 1000;
+function gameloop(timeMill) {
+  let timeSinceLast = 0;
+  if(timeMill !== undefined && lastTimeMs !== undefined){
+      timeSinceLast = (timeMill - lastTimeMs) / rate;
   }
-  state.world.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
-  lastTimeMilliseconds = timeMilliseconds;
+  state.world.step(fixedTimeStep, timeSinceLast, maxSubSteps);
+  lastTimeMs = timeMill;
 
   updateWorld(state);
   if(stage){

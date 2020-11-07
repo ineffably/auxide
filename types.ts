@@ -9,3 +9,8 @@ export interface GameTime {
   deltaFrame: number;
 }
 
+export interface GameObject {
+  body: p2.Body;
+  sprite: PIXI.Sprite;
+}
+

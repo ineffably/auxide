@@ -202,7 +202,7 @@
         "affectsGlobalScope": false
       },
       "../../client/game.ts": {
-        "version": "4168abd8591a711833b3a266817e4c680c0306ba04a70e698b4c3b3317d1f865",
+        "version": "db2d018f532f097c00ee00369ca4852beae01e338aaa8304f78c7afd51ef022e",
         "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
