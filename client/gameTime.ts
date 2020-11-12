@@ -1,17 +1,5 @@
 import { GameTime } from '../types';
 
-
-// let fixedTimeStep = 1 / 60, maxSubSteps = 10, lastTimeMilliseconds;
-// requestAnimationFrame(function animloop(timeMilliseconds){
-//     requestAnimationFrame(animloop);
-//     var timeSinceLastCall = 0;
-//     if(timeMilliseconds !== undefined && lastTimeMilliseconds !== undefined){
-//         timeSinceLastCall = (timeMilliseconds - lastTimeMilliseconds) / 1000;
-//     }
-//     // world.step(fixedTimeStep, timeSinceLastCall, maxSubSteps);
-//     // lastTimeMilliseconds = timeMilliseconds;
-// }
-
 let lastTime = Date.now();
 export function getDeltaTime(): GameTime {
   const now = Date.now();

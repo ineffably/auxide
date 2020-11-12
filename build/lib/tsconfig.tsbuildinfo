@@ -171,8 +171,18 @@
         "signature": "0b3761f25fd8f8a8b8a3e60679fae9fdc22306e5d42ab65445b16a21217df2aa",
         "affectsGlobalScope": true
       },
+      "../../node_modules/@types/p2/index.d.ts": {
+        "version": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
+        "signature": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
+        "affectsGlobalScope": false
+      },
+      "../../types.ts": {
+        "version": "0cd7c1b76a2b1eff92e8485b6955f49abc7876feb175af78dfc92adaec88e0f8",
+        "signature": "f6f3f2166671179a5e89819248355291b3b644bbe9bae4c23c458999c1c5c633",
+        "affectsGlobalScope": false
+      },
       "../../client/assetloader.ts": {
-        "version": "992705a9bf80d55e323faa0a566b36ea99976d2e157e8aee2ac40f28cc0465bc",
+        "version": "96600a1a5a32204f9296a517ec9a4468c2988d930602d957b56346c2af05f1ce",
         "signature": "6d1cf1494ac00ed26ebe2ca3648bb2a6e7f5817c737e5a7bfbfacfd634e8418d",
         "affectsGlobalScope": false
       },
@@ -181,28 +191,23 @@
         "signature": "c2ff78eea77ebeb1c09384671d815e266ec2c0d61052c512b8ee29baec8b2fc7",
         "affectsGlobalScope": false
       },
-      "../../node_modules/@types/p2/index.d.ts": {
-        "version": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
-        "signature": "65116e55fd55925f5094e7d3b59d4abc6fd593840ae14396ad8395bdc7dca099",
-        "affectsGlobalScope": false
-      },
-      "../../types.ts": {
-        "version": "f2c6c3880bc2642aeab17b908e47f4a95336fc1e23a4823c4e0c4f2fee3a71eb",
-        "signature": "0556c2cc4a2d78552ac27de799e512d26c50cff018ce68bc95c8d2a18706a3da",
+      "../../node_modules/keycode/index.d.ts": {
+        "version": "538a308e0d54a993e3a86a460d3498278960f5c412619b086b97a94a7aa8cfa5",
+        "signature": "538a308e0d54a993e3a86a460d3498278960f5c412619b086b97a94a7aa8cfa5",
         "affectsGlobalScope": false
       },
       "../../client/world.ts": {
-        "version": "aa2716f341879697a798c91b1dd209a7217fed8eee63774a56f51a416d4ec707",
-        "signature": "45d5027ba0b404b59965c92f9c2f66018214ae381ceea55ae5d414882a3031a1",
+        "version": "10a35226d29d08414dceb61e3bd6c5abb6e3800edb093d7df51921828c379404",
+        "signature": "9eb79235ed65b36ffaed8990330e803cbee7436b5cf6df33b310822a12b9720c",
         "affectsGlobalScope": false
       },
       "../../client/worldrenderer.ts": {
-        "version": "f3872104e93675880a528864764241b995df1082999214913b867ef134025af3",
-        "signature": "b9cc5a9d1da7e6fcc6d7a1e4b6e5e90c5707911959bf0fdfb80e4d22f072e4f5",
+        "version": "d70f5bb2af3220903b57cb85e2dccb89f574984a532877b570078d20627b856c",
+        "signature": "61d5e7486037678ae6936687e8985856f5d3a2fc76af33ce152717145a7807de",
         "affectsGlobalScope": false
       },
       "../../client/game.ts": {
-        "version": "76ae710a68e2a187f768300b3821fdcbc0eea89aa54b2a42868a8649c1d6878d",
+        "version": "89e4098e45e43627e03009959938238df2e6c7f728ee4916d05e3c87fdd8421f",
         "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
@@ -217,14 +222,9 @@
         "affectsGlobalScope": false
       },
       "../../client/index.ts": {
-        "version": "30fc76b34443d3e5ddd1e80466e4cc15cab9937208c8ffb70c644151d6c2a15a",
+        "version": "2ee15280c492e55ecd7609a6a84b4c9a63ba747ead1614f5c91905df57e5cedf",
         "signature": "914fc693fdf835daa9277683d0a00f9621724d0b331466b92ac884518bed97dc",
         "affectsGlobalScope": true
-      },
-      "../../client/player.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "affectsGlobalScope": false
       },
       "../../client/spritesheetviewer.ts": {
         "version": "73f601d278cbcc51f2e24a6a1e8734bdabcbbfa9f5924036226615aed64548ab",
@@ -683,13 +683,15 @@
     },
     "referencedMap": {
       "../../client/assetloader.ts": [
-        "../../node_modules/pixi.js/pixi.js.d.ts"
+        "../../node_modules/pixi.js/pixi.js.d.ts",
+        "../../types.ts"
       ],
       "../../client/game.ts": [
         "../../client/assetloader.ts",
         "../../client/setuprendersurface.ts",
         "../../client/world.ts",
         "../../client/worldrenderer.ts",
+        "../../node_modules/keycode/index.d.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts"
       ],
       "../../client/gametime.ts": [
@@ -709,6 +711,7 @@
       ],
       "../../client/world.ts": [
         "../../node_modules/@types/p2/index.d.ts",
+        "../../node_modules/keycode/index.d.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts",
         "../../types.ts"
       ],
@@ -1360,7 +1363,6 @@
       "../../client/game.ts",
       "../../client/gametime.ts",
       "../../client/index.ts",
-      "../../client/player.ts",
       "../../client/setuprendersurface.ts",
       "../../client/spritesheetviewer.ts",
       "../../client/ui.tsx",
@@ -1450,6 +1452,7 @@
       "../../node_modules/@types/webpack-sources/node_modules/source-map/source-map.d.ts",
       "../../node_modules/@types/webpack/index.d.ts",
       "../../node_modules/@types/ws/index.d.ts",
+      "../../node_modules/keycode/index.d.ts",
       "../../node_modules/pixi.js/pixi.js.d.ts",
       "../../node_modules/source-map/source-map.d.ts",
       "../../node_modules/tapable/tapable.d.ts",

@@ -20,3 +20,42 @@ export interface GameBody extends p2.Body {
   extra?: any;
 }
 
+export interface SpriteSheet {
+  frames?:     Record<string, FrameValue>;
+  animations?: Animations;
+  meta?:       Meta;
+}
+
+export interface Animations {
+  tile?: string[];
+}
+
+export interface FrameValue {
+  frame?:            SpriteDimensions;
+  rotated?:          boolean;
+  trimmed?:          boolean;
+  spriteSourceSize?: SpriteDimensions;
+  sourceSize?:       Size;
+}
+
+export interface SpriteDimensions {
+  x?: number;
+  y?: number;
+  w?: number;
+  h?: number;
+}
+
+export interface Size {
+  w?: number;
+  h?: number;
+}
+
+export interface Meta {
+  app?:         string;
+  version?:     string;
+  image?:       string;
+  format?:      string;
+  size?:        Size;
+  scale?:       string;
+  smartupdate?: string;
+}
