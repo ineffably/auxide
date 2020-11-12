@@ -182,23 +182,18 @@
         "affectsGlobalScope": false
       },
       "../../client/assetloader.ts": {
-        "version": "96600a1a5a32204f9296a517ec9a4468c2988d930602d957b56346c2af05f1ce",
-        "signature": "6d1cf1494ac00ed26ebe2ca3648bb2a6e7f5817c737e5a7bfbfacfd634e8418d",
+        "version": "018902a206d1edd2425a4f7efde6324f7a4a8e518609e8bb31f4fddcddbea623",
+        "signature": "37da2522269dc5e668d72244d67ca10b96837bac167fc065dee6f47d07473d3b",
         "affectsGlobalScope": false
       },
       "../../client/setuprendersurface.ts": {
-        "version": "9f84c0dd94afda9e7c843c6b3c4d09f89908bb2ae9b833736aa88796a9f5cec6",
+        "version": "c492e06e443efa1345010bad3b8fe58ef1f5fdba220a960cba405c5667843949",
         "signature": "c2ff78eea77ebeb1c09384671d815e266ec2c0d61052c512b8ee29baec8b2fc7",
         "affectsGlobalScope": false
       },
-      "../../node_modules/keycode/index.d.ts": {
-        "version": "538a308e0d54a993e3a86a460d3498278960f5c412619b086b97a94a7aa8cfa5",
-        "signature": "538a308e0d54a993e3a86a460d3498278960f5c412619b086b97a94a7aa8cfa5",
-        "affectsGlobalScope": false
-      },
       "../../client/world.ts": {
-        "version": "10a35226d29d08414dceb61e3bd6c5abb6e3800edb093d7df51921828c379404",
-        "signature": "9eb79235ed65b36ffaed8990330e803cbee7436b5cf6df33b310822a12b9720c",
+        "version": "61e2a42c9b86aa4495422a338b03502428157687fc1a0b43728f93efbf00e8e1",
+        "signature": "8bc8946085ba81992f424b1688cdc51e5135d86d9f0d3c963a8595d44fa908a7",
         "affectsGlobalScope": false
       },
       "../../client/worldrenderer.ts": {
@@ -206,13 +201,18 @@
         "signature": "61d5e7486037678ae6936687e8985856f5d3a2fc76af33ce152717145a7807de",
         "affectsGlobalScope": false
       },
+      "../../node_modules/keycode/index.d.ts": {
+        "version": "538a308e0d54a993e3a86a460d3498278960f5c412619b086b97a94a7aa8cfa5",
+        "signature": "538a308e0d54a993e3a86a460d3498278960f5c412619b086b97a94a7aa8cfa5",
+        "affectsGlobalScope": false
+      },
       "../../client/game.ts": {
-        "version": "89e4098e45e43627e03009959938238df2e6c7f728ee4916d05e3c87fdd8421f",
+        "version": "66e1ca29adaaa81ba75f7cd71b7c1806859bbd51bbc48e7d2045bb8f4161a82d",
         "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
       "../../client/gametime.ts": {
-        "version": "bed18d37f7f94cb5fd10f434332597767e497e966f378c89bd77c1f739b5376e",
+        "version": "5ecddea584b10124c60dc5692ed401d3182cbcf61dc4c47e11ce5ff8d902cd16",
         "signature": "2686979cb09e1b2a6f0732a5eb43e9b61f35f4ed2c396c26bf6285ab21bce52d",
         "affectsGlobalScope": false
       },
@@ -711,7 +711,6 @@
       ],
       "../../client/world.ts": [
         "../../node_modules/@types/p2/index.d.ts",
-        "../../node_modules/keycode/index.d.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts",
         "../../types.ts"
       ],
@@ -1030,7 +1029,8 @@
     },
     "exportedModulesMap": {
       "../../client/assetloader.ts": [
-        "../../node_modules/pixi.js/pixi.js.d.ts"
+        "../../node_modules/pixi.js/pixi.js.d.ts",
+        "../../types.ts"
       ],
       "../../client/gametime.ts": [
         "../../types.ts"

@@ -1,7 +1,6 @@
 import * as PIXI from 'pixi.js';
 import p2 from 'p2';
 import { GameTime, GameBody } from '../types';
-import keycode from 'keycode';
 
 function metersToPixels(m) { return m * 20; }
 function pixelsToMeters(p) { return p * 0.05; }
@@ -27,6 +26,12 @@ const maxSubSteps = 10;
 let lastTimeMs = 0;
 const rate = 1000;
 
+interface addGameObjectParams {
+  options: p2.BodyOptions;
+  extra?: any;
+  shape?: p2.Shape;
+}
+
 export class GameWorld {
   state: GameState;
   constructor(options: p2.WorldOptions = { gravity: [0, 0] }) {
@@ -41,65 +46,69 @@ export class GameWorld {
     } as GameState;
   }
 
+  public addGameObject({ options, extra, shape }: addGameObjectParams): GameBody {
+    const body = new p2.Body(options) as GameBody;
+    if (extra) {
+      body.extra = extra;
+    }
+    if (shape) {
+      body.addShape(shape);
+    }
+    return body;
+  }
+
   public create(): void {
     const { world } = this.state;
 
-    const player = new p2.Body({
-      mass: 1,
-      position: [-2, 0]
-    }) as GameBody;
-    player.extra = {
-      sprite: 'survivor1_stand.png',
-      type: 'player'
-    };
-    player.addShape(new p2.Circle({ radius: pixelsToMeters(16) }));
-    world.addBody(player);
+    world.addBody(this.addGameObject({
+      options: { mass: 1, position: [-2, 0] },
+      extra: { sprite: 'survivor1_stand.png', type: 'player' },
+      shape: new p2.Circle({ radius: pixelsToMeters(16) })
+    }));
 
-    const boxBody = new p2.Body({
-      mass: 1,
-      position: [-2, 6]
-    }) as GameBody;
-    boxBody.extra = { sprite: 'tile_205.png' }
-    boxBody.addShape(new p2.Box({ width: pixelsToMeters(64), height: pixelsToMeters(64) }));
-    world.addBody(boxBody);
+    world.addBody(this.addGameObject({
+      options: { mass: 1, position: [-2, 6] },
+      extra: { sprite: 'tile_205.png' },
+      shape: new p2.Box({ width: pixelsToMeters(64), height: pixelsToMeters(64) })
+    }));
 
-    const boxBody2 = new p2.Body({
-      mass: 0,
-      position: [3, 7],
-      collisionResponse: false
-    }) as GameBody;
-    boxBody2.extra = { sprite: 'image-21-5' }
-    boxBody2.addShape(new p2.Box({ width: pixelsToMeters(16), height: pixelsToMeters(16) }));
-    world.addBody(boxBody2);
+    world.addBody(this.addGameObject({
+      options: { mass: 0, position: [3, 7], collisionResponse: false },
+      extra: { sprite: 'image-21-5' },
+      shape: new p2.Box({ width: pixelsToMeters(16), height: pixelsToMeters(16) })
+    }));
 
-    const planeShape = new p2.Plane();
-    const plane = new p2.Body({ position: [0, -10], }) as GameBody;
-    plane.addShape(planeShape);
-    world.addBody(plane);
+    world.addBody(this.addGameObject({
+      options: { position: [0, -10] },
+      shape: new p2.Plane()
+    }))
+  }
+
+  public setupControls(player: p2.Body, keydown: Record<string, KeyboardEvent>): void {
+    player.angularVelocity = 0;
+    player.damping = 0.8
+    const speed = 30;
+    const turnSpeed = 4;
+    const keys = Object.keys(keydown);
+    if (keys.includes('down')) {
+      player.applyForceLocal([speed, 0]);
+    }
+    if (keys.includes('up')) {
+      player.applyForceLocal([-speed, 0]);
+    }
+    if (keys.includes('right')) {
+      player.angularVelocity = turnSpeed;
+    }
+    if (keys.includes('left')) {
+      player.angularVelocity = -turnSpeed;
+    }
   }
 
   public update(timeMill: number): void {
     const { world, keydown } = this.state;
     const [player] = world.bodies.filter((body: GameBody) => body.extra && body.extra.type && body.extra.type === 'player');
     if (player) {
-      player.angularVelocity = 0;
-      player.damping = 0.8
-
-      const speed = 10;
-      const turnSpeed = 4;
-      const keys = Object.keys(keydown);
-      if (keys.includes('down')) {
-        player.applyForceLocal([speed, 0]);
-      }
-      if (keys.includes('up')) {
-        player.applyForceLocal([-speed, 0]);
-      }
-      if (keys.includes('right')) {
-        player.angularVelocity = turnSpeed;
-      }
-      if (keys.includes('left')) {
-        player.angularVelocity = -turnSpeed;
-      }
+      this.setupControls(player, keydown);
     }
     let timeSinceLast = 0;
     if (timeMill !== undefined && lastTimeMs !== undefined) {

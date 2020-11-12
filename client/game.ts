@@ -2,7 +2,7 @@ import { renderSurface } from './setupRenderSurface';
 import { GameWorld, GameState } from './world';
 import { renderer } from './worldRenderer';
 import { load } from './assetLoader';
-import { Spritesheet, utils, Loader } from 'pixi.js';
+import { Spritesheet, Loader } from 'pixi.js';
 import keycode from 'keycode';
   
 const setupClientEvents = (state: GameState) => {
