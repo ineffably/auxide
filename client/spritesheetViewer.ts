@@ -2,6 +2,7 @@ import * as PIXI from "pixi.js";
 const { Renderer } = PIXI;
 const loader = new PIXI.Loader();
 const stage = new PIXI.Container();
+
 const renderer = new Renderer({
   width: 1024,
   height: 768,
@@ -18,7 +19,6 @@ if (gameElement) {
   };
 }
 const container = new PIXI.Container();
-
 interface SpriteEntry {
   sprite: PIXI.Sprite;
   name: string;

@@ -1,9 +1,15 @@
 import * as PIXI from 'pixi.js';
 import p2 from 'p2';
 import { GameTime, GameBody } from '../types';
+import { generateTerrain } from './terrain';
 
 function metersToPixels(m) { return m * 20; }
 function pixelsToMeters(p) { return p * 0.05; }
+
+export interface TerrainData {
+  pos: number[];
+  tile: string;
+}
 
 export interface GameState {
   world: p2.World;
@@ -14,6 +20,7 @@ export interface GameState {
   keydown?: Record<string, KeyboardEvent>;
   sprites: PIXI.Sprite[];
   loader: PIXI.Loader;
+  terrain: TerrainData[][];
 }
 
 export interface CreateWorld {
@@ -32,9 +39,16 @@ interface addGameObjectParams {
   shape?: p2.Shape;
 }
 
+const terraNames = [
+  'image-21-5',
+  'image-21-6',
+  'image-21-7'
+]
+
 export class GameWorld {
   state: GameState;
   constructor(options: p2.WorldOptions = { gravity: [0, 0] }) {
+    const width = 1000, height = 1000;
     this.state = {
       world: new p2.World(options),
       stage: new PIXI.Container(),
@@ -42,8 +56,25 @@ export class GameWorld {
       gameTime: {} as GameTime,
       keydown: {} as Record<string, KeyboardEvent>,
       keyDownEvent: null as KeyboardEvent,
-      keyUpEvent: null as KeyboardEvent
+      keyUpEvent: null as KeyboardEvent,
+      terrain: [] as TerrainData[][]
     } as GameState;
+
+    this.state.terrain = generateTerrain(width, height).map(layer => {
+      const place = { col: 0, row: 0 };
+      const getTerrain = (n: number, i: number) => {
+        if(i % 1000 === 0){
+          place.row++;
+          place.col = 0;
+        }
+        const result = {
+          pos: [place.col, place.row],
+          tile: terraNames[n]
+        } as TerrainData;
+        return result;
+      }
+      return layer.data.map(getTerrain);
+    })
   }
 
   public addGameObject({ options, extra, shape }: addGameObjectParams): GameBody {
@@ -106,7 +137,7 @@ export class GameWorld {
 
   public update(timeMill: number): void {
     const { world, keydown } = this.state;
-    const [player] = world.bodies.filter((body: GameBody) => body.extra && body.extra.type && body.extra.type === 'player');
+    const [player] = world.bodies.filter((body: GameBody) => body.extra && body.extra.type === 'player');
     if (player) {
       this.setupControls(player, keydown);
     }

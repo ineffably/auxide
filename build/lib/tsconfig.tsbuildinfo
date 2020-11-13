@@ -187,18 +187,23 @@
         "affectsGlobalScope": false
       },
       "../../client/setuprendersurface.ts": {
-        "version": "c492e06e443efa1345010bad3b8fe58ef1f5fdba220a960cba405c5667843949",
+        "version": "1c472b9c5d37ca4c464a2e4651713e07d919e54423f726aa6f6dc382c5f2bc7c",
         "signature": "c2ff78eea77ebeb1c09384671d815e266ec2c0d61052c512b8ee29baec8b2fc7",
         "affectsGlobalScope": false
       },
+      "../../client/terrain.ts": {
+        "version": "0f7c66585cb313356b8776f884bd84467105c0d4d426a4f29f1a9d3cfcbe64cd",
+        "signature": "ce11b832f8a766055237d668f45b1545328ef85912feb672cacef0a323c7695a",
+        "affectsGlobalScope": false
+      },
       "../../client/world.ts": {
-        "version": "61e2a42c9b86aa4495422a338b03502428157687fc1a0b43728f93efbf00e8e1",
-        "signature": "8bc8946085ba81992f424b1688cdc51e5135d86d9f0d3c963a8595d44fa908a7",
+        "version": "9a674702fbeed6e7ce862f21e77c3895fe208eded1eff497309cf309a4a95cc3",
+        "signature": "8d68c3e916d9a7ef253abfdca85b1b213a9b8d092c155ae1ba7210f067e4cedf",
         "affectsGlobalScope": false
       },
       "../../client/worldrenderer.ts": {
-        "version": "d70f5bb2af3220903b57cb85e2dccb89f574984a532877b570078d20627b856c",
-        "signature": "61d5e7486037678ae6936687e8985856f5d3a2fc76af33ce152717145a7807de",
+        "version": "fa5610b7150983a6706c2825f0ab43ceecf45dbcd1013b0e7b03cacc1dbdba9f",
+        "signature": "77412c3185094579d46f1bb6dfa384a0e5a25a753989b79ac9f011f36aa0e4d2",
         "affectsGlobalScope": false
       },
       "../../node_modules/keycode/index.d.ts": {
@@ -207,7 +212,7 @@
         "affectsGlobalScope": false
       },
       "../../client/game.ts": {
-        "version": "66e1ca29adaaa81ba75f7cd71b7c1806859bbd51bbc48e7d2045bb8f4161a82d",
+        "version": "753e5f757d4129fda860a6cc649254b6c4dfda664786b37013cc2554346379e0",
         "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
@@ -710,11 +715,13 @@
         "../../client/game.ts"
       ],
       "../../client/world.ts": [
+        "../../client/terrain.ts",
         "../../node_modules/@types/p2/index.d.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts",
         "../../types.ts"
       ],
       "../../client/worldrenderer.ts": [
+        "../../client/world.ts",
         "../../node_modules/@types/p2/index.d.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts",
         "../../types.ts"
@@ -1047,6 +1054,7 @@
         "../../types.ts"
       ],
       "../../client/worldrenderer.ts": [
+        "../../client/world.ts",
         "../../node_modules/@types/p2/index.d.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts"
       ],
@@ -1365,6 +1373,7 @@
       "../../client/index.ts",
       "../../client/setuprendersurface.ts",
       "../../client/spritesheetviewer.ts",
+      "../../client/terrain.ts",
       "../../client/ui.tsx",
       "../../client/world.ts",
       "../../client/worldrenderer.ts",

@@ -6,7 +6,6 @@ export const renderSurface = new Renderer({
   backgroundColor: 0x1077bb
 });
 
-
 const renderingTarget = (renderer) => {
   const gameElement = document.getElementById('game');
   if (gameElement) {

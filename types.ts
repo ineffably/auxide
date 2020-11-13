@@ -17,8 +17,13 @@ export interface GameObject {
 }
 
 export interface GameBody extends p2.Body {
-  extra?: any;
+  extra?: BodyExtra;
 }
+
+export interface BodyExtra {
+  sprite?: string; 
+  type?: string; }
+};
 
 export interface SpriteSheet {
   frames?:     Record<string, FrameValue>;
@@ -59,3 +64,4 @@ export interface Meta {
   scale?:       string;
   smartupdate?: string;
 }
+

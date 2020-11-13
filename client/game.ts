@@ -4,12 +4,12 @@ import { renderer } from './worldRenderer';
 import { load } from './assetLoader';
 import { Spritesheet, Loader } from 'pixi.js';
 import keycode from 'keycode';
-  
+
 const setupClientEvents = (state: GameState) => {
   // document.onwheel = (event) => {
   //   state.startY += event.deltaY;
   // };
-  
+
   document.onkeydown = (event) => {
     const key = keycode(event);
     state.keyDownEvent = event;
@@ -43,13 +43,13 @@ async function init(): Promise<void> {
 function gameloop(timeMill) {
   const { gameWorld, spritesheets, loader } = localState;
   const { state } = gameWorld;
-  const { stage, world } = state;
+  const { stage, world, terrain } = state;
   const { resources } = loader;
-  if(stage){
-    renderer({world, spritesheets, stage, resources});
+  if (stage) {
+    renderer({ world, spritesheets, stage, resources, terrain });
     renderSurface.render(stage);
   }
-  gameWorld.update(timeMill)
+  gameWorld.update(timeMill);
   requestAnimationFrame(gameloop);
 }
 
