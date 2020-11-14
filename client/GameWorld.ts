@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import p2 from 'p2';
 import { GameTime, GameBody } from '../types';
 import { generateTerrain } from './terrain';
+import { CharacterAnimation } from './assetLoader';
 
 function metersToPixels(m) { return m * 20; }
 function pixelsToMeters(p) { return p * 0.05; }
@@ -21,6 +22,7 @@ export interface GameState {
   sprites: PIXI.Sprite[];
   loader: PIXI.Loader;
   terrain: TerrainData[][];
+  animations?: Record<string, CharacterAnimation>
 }
 
 export interface CreateWorld {
@@ -33,33 +35,29 @@ const maxSubSteps = 10;
 let lastTimeMs = 0;
 const rate = 1000;
 
+interface Extra {
+  sprite?: string;
+  type?: string;
+  character?: string;
+}
+
 interface addGameObjectParams {
   options: p2.BodyOptions;
-  extra?: any;
+  extra?: Extra;
   shape?: p2.Shape;
 }
 
 const terraNames = [
-  'image-21-5',
-  'image-21-6',
-  'image-21-7'
+  'terrain-21-5',
+  'terrain-21-6',
+  'terrain-21-7'
 ]
 
 export class GameWorld {
-  state: GameState;
-  constructor(options: p2.WorldOptions = { gravity: [0, 0] }) {
+  public state: GameState;
+  constructor(prevState: GameState, options: p2.WorldOptions = { gravity: [0, 0] }) {
     const width = 1000, height = 1000;
-    this.state = {
-      world: new p2.World(options),
-      stage: new PIXI.Container(),
-      loader: null as PIXI.Loader,
-      gameTime: {} as GameTime,
-      keydown: {} as Record<string, KeyboardEvent>,
-      keyDownEvent: null as KeyboardEvent,
-      keyUpEvent: null as KeyboardEvent,
-      terrain: [] as TerrainData[][]
-    } as GameState;
-
+    this.state = prevState || GameWorld.GenerateState(options);
     this.state.terrain = generateTerrain(width, height).map(layer => {
       const place = { col: 0, row: 0 };
       const getTerrain = (n: number, i: number) => {
@@ -77,6 +75,21 @@ export class GameWorld {
     })
   }
 
+  public static GenerateState(options: p2.WorldOptions = { gravity: [0, 0] }): GameState {
+    const state = {
+      world: new p2.World(options),
+      stage: new PIXI.Container(),
+      loader: null as PIXI.Loader,
+      gameTime: {} as GameTime,
+      keydown: {} as Record<string, KeyboardEvent>,
+      keyDownEvent: null as KeyboardEvent,
+      keyUpEvent: null as KeyboardEvent,
+      terrain: [] as TerrainData[][],
+      animations: {} as Record<string, CharacterAnimation>
+    } as GameState;
+    return state;
+  }
+
   public addGameObject({ options, extra, shape }: addGameObjectParams): GameBody {
     const body = new p2.Body(options) as GameBody;
     if (extra) {
@@ -90,11 +103,12 @@ export class GameWorld {
 
   public create(): void {
     const { world } = this.state;
+    console.log(this.state.terrain);
 
     world.addBody(this.addGameObject({
-      options: { mass: 1, position: [-2, 0] },
-      extra: { sprite: 'survivor1_stand.png', type: 'player' },
-      shape: new p2.Circle({ radius: pixelsToMeters(16) })
+      options: { mass: 1, position: [-2, 0], fixedRotation: true },
+      extra: { type: 'player', character: 'prince' },
+      shape: new p2.Box({ width: pixelsToMeters(32), height: pixelsToMeters(48) })
     }));
 
     world.addBody(this.addGameObject({
@@ -105,7 +119,7 @@ export class GameWorld {
 
     world.addBody(this.addGameObject({
       options: { mass: 0, position: [3, 7], collisionResponse: false },
-      extra: { sprite: 'image-21-5' },
+      extra: { sprite: 'terrain-21-5' },
       shape: new p2.Box({ width: pixelsToMeters(16), height: pixelsToMeters(16) })
     }));
 
@@ -115,31 +129,38 @@ export class GameWorld {
     }))
   }
 
-  public setupControls(player: p2.Body, keydown: Record<string, KeyboardEvent>): void {
+  public playerControls(player: p2.Body, keydown: Record<string, KeyboardEvent>): void {
     player.angularVelocity = 0;
     player.damping = 0.8
     const speed = 30;
     const turnSpeed = 4;
     const keys = Object.keys(keydown);
     if (keys.includes('down')) {
-      player.applyForceLocal([speed, 0]);
+      player.applyForceLocal([0, -speed]);
     }
     if (keys.includes('up')) {
-      player.applyForceLocal([-speed, 0]);
+      player.applyForceLocal([0, speed]);
     }
     if (keys.includes('right')) {
-      player.angularVelocity = turnSpeed;
+      player.applyForceLocal([-speed, 0]);
     }
     if (keys.includes('left')) {
-      player.angularVelocity = -turnSpeed;
+      player.applyForceLocal([speed, 0]);
     }
+
+    // if (keys.includes('right')) {
+    //   player.angularVelocity = turnSpeed;
+    // }
+    // if (keys.includes('left')) {
+    //   player.angularVelocity = -turnSpeed;
+    // }
   }
 
   public update(timeMill: number): void {
     const { world, keydown } = this.state;
     const [player] = world.bodies.filter((body: GameBody) => body.extra && body.extra.type === 'player');
     if (player) {
-      this.setupControls(player, keydown);
+      this.playerControls(player, keydown);
     }
     let timeSinceLast = 0;
     if (timeMill !== undefined && lastTimeMs !== undefined) {

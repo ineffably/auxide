@@ -1,8 +1,8 @@
 import { renderSurface } from './setupRenderSurface';
-import { GameWorld, GameState } from './world';
+import { GameWorld, GameState, TerrainData } from './GameWorld';
 import { renderer } from './worldRenderer';
-import { load } from './assetLoader';
-import { Spritesheet, Loader } from 'pixi.js';
+import { load, CharacterAnimation } from './assetLoader';
+import { Spritesheet, Loader, AnimatedSprite } from 'pixi.js';
 import keycode from 'keycode';
 
 const setupClientEvents = (state: GameState) => {
@@ -28,12 +28,14 @@ const setupClientEvents = (state: GameState) => {
 const localState = {
   gameWorld: null as GameWorld,
   spritesheets: [] as Spritesheet[],
-  loader: null as Loader
+  loader: null as Loader,
+  animatedSprites: {} as Record<string, AnimatedSprite>
 }
 
 async function init(): Promise<void> {
-  localState.loader = await load();
-  const gameWorld = new GameWorld();
+  const state = GameWorld.GenerateState();
+  localState.loader = await load(state);
+  const gameWorld = new GameWorld(state);
   localState.gameWorld = gameWorld;
   gameWorld.create();
   setupClientEvents(gameWorld.state);
@@ -41,12 +43,11 @@ async function init(): Promise<void> {
 }
 
 function gameloop(timeMill) {
-  const { gameWorld, spritesheets, loader } = localState;
+  const { gameWorld, spritesheets } = localState;
   const { state } = gameWorld;
   const { stage, world, terrain } = state;
-  const { resources } = loader;
   if (stage) {
-    renderer({ world, spritesheets, stage, resources, terrain });
+    renderer({ world, spritesheets, stage, terrain, state });
     renderSurface.render(stage);
   }
   gameWorld.update(timeMill);

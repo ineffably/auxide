@@ -22,8 +22,9 @@ export interface GameBody extends p2.Body {
 
 export interface BodyExtra {
   sprite?: string; 
-  type?: string; }
-};
+  type?: string;
+  character?: string;
+}
 
 export interface SpriteSheet {
   frames?:     Record<string, FrameValue>;
