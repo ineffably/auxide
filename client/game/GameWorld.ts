@@ -1,10 +1,10 @@
 import * as PIXI from 'pixi.js';
 import p2 from 'p2';
-import { GameTime, GameBody } from '../types';
+import { GameTime, GameBody } from '../../types';
 import { generateTerrain } from './terrain';
 import { CharacterAnimation } from './assetLoader';
 
-function metersToPixels(m) { return m * 20; }
+// function metersToPixels(m) { return m * 20; }
 function pixelsToMeters(p) { return p * 0.05; }
 
 export interface TerrainData {
@@ -58,7 +58,7 @@ export class GameWorld {
   public state: GameState;
   constructor(prevState: GameState, options: p2.WorldOptions = { gravity: [0, 0] }) {
     const width = 1000, height = 1000;
-    this.state = prevState || GameWorld.GenerateState(options);
+    this.state = prevState || GameWorld.CreateState(options);
     const place = { col: 0, row: 0 };
     this.state.terrainData = generateTerrain(width, height).data.map((value, index) => {
       const getTerrain = (n: number, i: number) => {
@@ -77,7 +77,7 @@ export class GameWorld {
     })
   }
 
-  public static GenerateState(options: p2.WorldOptions = { gravity: [0, 0] }): GameState {
+  public static CreateState(options: p2.WorldOptions = { gravity: [0, 0] }): GameState {
     const state = {
       world: new p2.World(options),
       stage: new PIXI.Container(),
@@ -154,7 +154,8 @@ export class GameWorld {
     player.angularVelocity = 0;
     player.damping = 0.8
     const speed = 30;
-    const turnSpeed = 4;
+    // const turnSpeed = 4;
+    
     const keys = Object.keys(keydown);
     if (keys.includes('down')) {
       player.applyForceLocal([0, -speed]);

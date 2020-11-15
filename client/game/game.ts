@@ -1,7 +1,7 @@
 import { renderSurface } from './setupRenderSurface';
-import { GameWorld, GameState, TerrainData } from './GameWorld';
+import { GameWorld, GameState } from './GameWorld';
 import { renderer } from './worldRenderer';
-import { load, CharacterAnimation } from './assetLoader';
+import { load } from './assetLoader';
 import { Spritesheet, Loader, AnimatedSprite } from 'pixi.js';
 import keycode from 'keycode';
 
@@ -33,7 +33,7 @@ const localState = {
 }
 
 async function init(): Promise<void> {
-  const state = GameWorld.GenerateState();
+  const state = GameWorld.CreateState();
   localState.loader = await load(state);
   const gameWorld = new GameWorld(state);
   localState.gameWorld = gameWorld;

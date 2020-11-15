@@ -1,4 +1,4 @@
-import { GameTime } from '../types';
+import { GameTime } from '../../types';
 
 let lastTime = Date.now();
 export function getDeltaTime(): GameTime {

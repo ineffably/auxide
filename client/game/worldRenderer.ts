@@ -1,11 +1,11 @@
 import p2 from 'p2';
-import { GameBody } from '../types';
-import { Sprite, Spritesheet, Container, IResourceDictionary, utils, Rectangle, Extract, AnimatedSprite, State } from 'pixi.js';
+import { GameBody } from '../../types';
+import { Sprite, Spritesheet, Container, IResourceDictionary, utils, Rectangle, AnimatedSprite } from 'pixi.js';
 import { TerrainData, GameState } from './GameWorld';
 import { CharacterAnimation } from './assetLoader';
 
 function metersToPixels(m) { return m * 20; }
-function pixelsToMeters(p) { return p * 0.05; }
+// function pixelsToMeters(p) { return p * 0.05; }
 
 interface ClientState {
   sprites: Record<string, Sprite>;

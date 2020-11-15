@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { SpriteSheet } from '../types';
+import { SpriteSheet } from '../../types';
 import { GameState } from './GameWorld';
 const loader = PIXI.Loader.shared;
 

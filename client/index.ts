@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { ui } from './UI';
+import { UI } from './web/UI';
 
 declare global {
   // eslint-disable-next-line no-var 
@@ -10,6 +10,6 @@ declare global {
 global.__APP_LOADED__ = true;
 
 ReactDOM.render(
-  React.createElement(ui),
+  React.createElement(UI),
   document.getElementById('root')
 );
