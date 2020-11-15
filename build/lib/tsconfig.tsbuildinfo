@@ -182,23 +182,18 @@
         "affectsGlobalScope": false
       },
       "../../client/terrain.ts": {
-        "version": "0f7c66585cb313356b8776f884bd84467105c0d4d426a4f29f1a9d3cfcbe64cd",
-        "signature": "ce11b832f8a766055237d668f45b1545328ef85912feb672cacef0a323c7695a",
-        "affectsGlobalScope": false
-      },
-      "../../client/spritesheetviewer.ts": {
-        "version": "3804ac988fc98fbe920a9f6ae1a777085e388d7aaeef576a96f07c7976823e5f",
-        "signature": "c85baab5d290edb477f36e2d55ce11cbd154fca894f261828ef8b9cb44b25a48",
+        "version": "cb9067750b4dbb000f78b642ea24d8e6fd6fa587db82dfb5929ab3e60c51c7af",
+        "signature": "a06ee1429d2a6f2a1e8fd2a90f3ebaad5aff1f6ab884242c8f6c753c5dec85c6",
         "affectsGlobalScope": false
       },
       "../../client/assetloader.ts": {
-        "version": "21253fae46036c34fdfad24530b7b80fea54e4cdc54b608d0985840f7431c651",
+        "version": "f33fc3a12e62d78ddc2f1b08a3977ec235934beef3dd3605fe8ea4b3ee1aa33b",
         "signature": "6875a12813a5d3117cfb429fdafc9272808e5cd005e18f2f7eb0feb5a1380d5c",
         "affectsGlobalScope": false
       },
       "../../client/gameworld.ts": {
-        "version": "269157db62d26c84a4941b347a027af9647a45af3f19009f151c26e83c452f92",
-        "signature": "9e02124e6fc466f4de7b52fd3a497ce339f8b1ac537353765ff3ed091ef34d6a",
+        "version": "50fc440d3a2d8c7d2b83c2aa2ec895955a50532e5e30bfd51b660f31e18e17bd",
+        "signature": "dd80d5844d258bb9cc11f0de6ef8d4fe411a91953258898338c96bbece5acb14",
         "affectsGlobalScope": false
       },
       "../../client/setuprendersurface.ts": {
@@ -207,8 +202,8 @@
         "affectsGlobalScope": false
       },
       "../../client/worldrenderer.ts": {
-        "version": "f84bf3502f878eb7759f9239633ba08b588f81861ed64465ea1b610355d1cb1b",
-        "signature": "17d99284174a0e09b83cededff595f89b46d08ad576e8374857b0cee612013a8",
+        "version": "5e06b39553004c3ccd0965cd770210c3e0163160721aa9532e1323c4e31204d2",
+        "signature": "79956d9d259db8786d38639bbcc8c59b6301ab649a0f061bf8acf7e8d256c4ee",
         "affectsGlobalScope": false
       },
       "../../node_modules/keycode/index.d.ts": {
@@ -217,7 +212,7 @@
         "affectsGlobalScope": false
       },
       "../../client/game.ts": {
-        "version": "cc9f3d75c637131a582f76e28324fda9c2d1a1cfaf4c4e9deccb414d97043b65",
+        "version": "2328310e3b346d37e795f5a9828ca6aa214da44933bc43ec72c2810469b5dc02",
         "signature": "bd79943be4f46ec9a4375448630e99ffc15d183e90d3a2feb9fe86915273a2d4",
         "affectsGlobalScope": false
       },
@@ -235,6 +230,11 @@
         "version": "2ee15280c492e55ecd7609a6a84b4c9a63ba747ead1614f5c91905df57e5cedf",
         "signature": "914fc693fdf835daa9277683d0a00f9621724d0b331466b92ac884518bed97dc",
         "affectsGlobalScope": true
+      },
+      "../../client/spritesheetviewer.ts": {
+        "version": "3804ac988fc98fbe920a9f6ae1a777085e388d7aaeef576a96f07c7976823e5f",
+        "signature": "c85baab5d290edb477f36e2d55ce11cbd154fca894f261828ef8b9cb44b25a48",
+        "affectsGlobalScope": false
       },
       "../../node_modules/@types/anymatch/index.d.ts": {
         "version": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76",
@@ -689,7 +689,6 @@
     "referencedMap": {
       "../../client/assetloader.ts": [
         "../../client/gameworld.ts",
-        "../../client/spritesheetviewer.ts",
         "../../node_modules/pixi.js/pixi.js.d.ts",
         "../../types.ts"
       ],

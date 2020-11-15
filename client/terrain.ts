@@ -10,17 +10,15 @@ export const generateTerrain = (width: 1000, height: 1000) => {
     }
     return results;
   }
-  const layers = [] as Layer[];
   const layer = {
     height,
     width,
     x: 0,
     y: 0,
     data: genLayer(width, height, 3)
-  }
-  layers.push(layer);
+  } as Layer;
   
-  return layers;
+  return layer;
 }
 
 export interface Terrain {

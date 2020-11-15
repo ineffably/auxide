@@ -54,7 +54,6 @@ const getSprite = ({ clientState: state, id, sprite, sprites, stage, zIndex }: G
   return returnSprite;
 }
 
-
 const getAnimatedSprite = (
   stage: PIXI.Container, 
   clientState: ClientState, 
@@ -94,7 +93,7 @@ export interface RenderArgs {
   world: p2.World;
   spritesheets: Spritesheet[];
   stage: Container;
-  terrain: TerrainData[][];
+  terrain: TerrainData[];
   state: GameState;
   resources?: IResourceDictionary;
 }
@@ -106,20 +105,22 @@ const getDirection = ([x, y]) => {
   return (Math.abs(x) > Math.abs(y) ? axis[0] : axis[1]) as 'up' | 'down' | 'left' | 'right';
 }
 
-export const renderer = ({
+export function renderer({
   world,
   spritesheets,
   stage,
   state
-}: RenderArgs): void => {
-  const { sprites, camera } = clientState;
-  const { animations } = state;
+}: RenderArgs): void {
   if (!spritesheets) return;
+  const { sprites, camera } = clientState;
+  const { animations, terrainLayer } = state;
   stage.sortableChildren = true;
+
   world.bodies.forEach((body: GameBody) => {
     if(!body.extra) return;
     const { extra, id, velocity } = body;
     const { sprite, type, character } = extra;
+    const [vx, vy] = velocity;
 
     if (sprite) {
       const zIndex = body.mass === 0 ? -100 : type === 'player' ? 100 : 0;
@@ -131,13 +132,11 @@ export const renderer = ({
     }
 
     if (character && animations) {
-
       const animatedSprite = getAnimatedSprite(stage, clientState, character, 100, getDirection(velocity), animations);
       ['up', 'down', 'left', 'right'].forEach(dir => {
         clientState.animatedSprites[`${character}-${dir}`].visible = false;
       })
-      const [vx, vy] = velocity;
-      const magnitude = Math.sqrt(vx * vx + vy * vy)
+      const magnitude = Math.sqrt(vx * vx + vy * vy);
       animatedSprite.animationSpeed = Math.min(magnitude / 80, 0.5);
       animatedSprite.autoUpdate = true;
       animatedSprite.loop = true;
@@ -150,5 +149,9 @@ export const renderer = ({
       clientState.camera = updateCamera(body, camera);
     }
 
+    terrainLayer.position.x = -camera.x - (innerWidth/2);
+    terrainLayer.position.y = -camera.y - (innerHeight/2);
+
   })
+
 }

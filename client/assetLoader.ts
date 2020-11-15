@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js';
 import { SpriteSheet } from '../types';
-import { world } from './spritesheetViewer';
 import { GameState } from './GameWorld';
 const loader = PIXI.Loader.shared;
 
@@ -107,6 +106,8 @@ export const load = async (state: GameState): Promise<PIXI.Loader> => {
         hCell: 32, cols: 32, rows: 32, width: 1024, height: 1024, prefix: 'terrain'
       };
       const { texture } = loader.resources['terrain'];
+      texture.baseTexture.mipmap = PIXI.MIPMAP_MODES.OFF;
+      texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
       const spritesheet = new PIXI.Spritesheet(
         texture,
         generateSpritesheetJSON(sheetParams)
