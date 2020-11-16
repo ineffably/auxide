@@ -1,9 +1,17 @@
 import WebSocket from 'ws';
 
-export const init = () => {
+const wsTable = [] as any[];
+
+export const init = (): { socketServer: WebSocket.Server } => {
   const socketServer = new WebSocket.Server({
     port: 8888,
+    clientTracking: true
   });
+
+  const gamehost = new WebSocket('ws://localhost:8888/game')
+  gamehost.on('open', () => { gamehost.send('open') });
+  // gamehost.on('connection', (ws) => {})
+  
 
   const ws = new WebSocket('ws://localhost:8888/waitingroom');
   ws.on('open', function open() {
@@ -11,11 +19,18 @@ export const init = () => {
   });
 
   socketServer.on('connection', function connection(ws) {
+    if(!wsTable.includes(ws)){
+      wsTable.push(ws);
+    }
+    else {
+      console.log('=== ws found');
+    }
+
     ws.on('message', function incoming(message) {
-      console.log('received: %s', message);
+      ws.send(message);
     });
    
-    ws.send('something');
+    ws.send('connected');
   });
   
   return {

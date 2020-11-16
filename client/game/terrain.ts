@@ -1,4 +1,6 @@
 
+
+
 export const generateTerrain = (width: 1000, height: 1000) => {
   const genLayer = (width, height, max) => {
     const results = [] as number[];

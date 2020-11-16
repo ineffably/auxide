@@ -26,6 +26,12 @@ export interface BodyExtra {
   character?: string;
 }
 
+export interface AddGameObjectParams {
+  options: p2.BodyOptions;
+  extra?: BodyExtra;
+  shape?: p2.Shape;
+}
+
 export interface SpriteSheet {
   frames?:     Record<string, FrameValue>;
   animations?: Animations;

@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import p2 from 'p2';
-import { GameTime, GameBody } from '../../types';
+import { GameTime, GameBody, AddGameObjectParams } from '../../types';
 import { generateTerrain } from './terrain';
 import { CharacterAnimation } from './assetLoader';
 
@@ -22,7 +22,7 @@ export interface GameState {
   keydown?: Record<string, KeyboardEvent>;
   sprites: PIXI.Sprite[];
   loader: PIXI.Loader;
-  terrainData: TerrainData[];
+  terrainData?: TerrainData[];
   animations?: Record<string, CharacterAnimation>
 }
 
@@ -36,45 +36,38 @@ const maxSubSteps = 10;
 let lastTimeMs = 0;
 const rate = 1000;
 
-interface Extra {
-  sprite?: string;
-  type?: string;
-  character?: string;
-}
-
-interface addGameObjectParams {
-  options: p2.BodyOptions;
-  extra?: Extra;
-  shape?: p2.Shape;
-}
-
 const terraNames = [
   'terrain-21-5',
   'terrain-22-5',
   'terrain-23-5'
 ]
 
+const generateTerrainData = () => {
+  const place = { col: 0, row: 0 };
+  const width = 1000, height = 1000;
+
+  return generateTerrain(width, height).data.map((value, index) => {
+    const getTerrain = (n: number, i: number) => {
+      if (i % 1000 === 0) {
+        place.row++;
+        place.col = 0;
+      }
+
+      return {
+        pos: [place.col++, place.row],
+        tile: terraNames[n]
+      } as TerrainData;
+    }
+
+    return getTerrain(value, index);
+  })
+}
+
 export class GameWorld {
   public state: GameState;
   constructor(prevState: GameState, options: p2.WorldOptions = { gravity: [0, 0] }) {
-    const width = 1000, height = 1000;
     this.state = prevState || GameWorld.CreateState(options);
-    const place = { col: 0, row: 0 };
-    this.state.terrainData = generateTerrain(width, height).data.map((value, index) => {
-      const getTerrain = (n: number, i: number) => {
-        if (i % 1000 === 0) {
-          place.row++;
-          place.col = 0;
-        }
-
-        return {
-          pos: [place.col++, place.row],
-          tile: terraNames[n]
-        } as TerrainData;
-      }
-
-      return getTerrain(value, index);
-    })
+    // this.state.terrainData = generateTerrainData();
   }
 
   public static CreateState(options: p2.WorldOptions = { gravity: [0, 0] }): GameState {
@@ -93,7 +86,7 @@ export class GameWorld {
     return state;
   }
 
-  public addGameObject({ options, extra, shape }: addGameObjectParams): GameBody {
+  public addGameObject({ options, extra, shape }: AddGameObjectParams): GameBody {
     const body = new p2.Body(options) as GameBody;
     if (extra) {
       body.extra = extra;
@@ -112,19 +105,20 @@ export class GameWorld {
       y: innerHeight + 1
     };
     
-    const r = new PIXI.Rectangle(0, 0, o.x, o.y);
-    terrainData.forEach(({ tile, pos }) => {
-      const [x, y] = pos;
-      if (r.contains(x*32, y*32)) {
-        const texture = PIXI.utils.TextureCache[tile] as PIXI.Texture;
-        const sprite = PIXI.Sprite.from(texture);
-        sprite.position.x = x * 32;
-        sprite.position.y = y * 32;
-        terrainLayer.addChild(sprite);
-      }
-    });
-
-    stage.addChild(terrainLayer);
+    if(terrainData){
+      const r = new PIXI.Rectangle(0, 0, o.x, o.y);
+      terrainData.forEach(({ tile, pos }) => {
+        const [x, y] = pos;
+        if (r.contains(x*32, y*32)) {
+          const texture = PIXI.utils.TextureCache[tile] as PIXI.Texture;
+          const sprite = PIXI.Sprite.from(texture);
+          sprite.position.x = x * 32;
+          sprite.position.y = y * 32;
+          terrainLayer.addChild(sprite);
+        }
+      });
+      stage.addChild(terrainLayer);
+    }
 
     world.addBody(this.addGameObject({
       options: { mass: 1, position: [-2, 0], fixedRotation: true },

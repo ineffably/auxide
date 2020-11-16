@@ -7,6 +7,5 @@ export const Game: React.FunctionComponent = () => {
     document.getElementById('game').style.display = 'block';
     init();
   })
-  console.log('== Game Page Render ==')
   return(<div/>);
 }
