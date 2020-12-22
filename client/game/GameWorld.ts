@@ -1,9 +1,9 @@
 import * as PIXI from 'pixi.js';
-import p2 from 'p2';
+import p2, { Body } from 'p2';
 import { GameTime, GameBody, AddGameObjectParams } from '../../types';
 import { generateTerrain } from './terrain';
 import { CharacterAnimation } from './assetLoader';
-
+import { GameServer } from '../../server/GameServer'
 // function metersToPixels(m) { return m * 20; }
 function pixelsToMeters(p) { return p * 0.05; }
 
@@ -23,7 +23,8 @@ export interface GameState {
   sprites: PIXI.Sprite[];
   loader: PIXI.Loader;
   terrainData?: TerrainData[];
-  animations?: Record<string, CharacterAnimation>
+  animations?: Record<string, CharacterAnimation>;
+  localServer?: GameServer;
 }
 
 export interface CreateWorld {
@@ -31,16 +32,15 @@ export interface CreateWorld {
   sprites: PIXI.Sprite[];
 }
 
-const fixedTimeStep = 1 / 60;
-const maxSubSteps = 10;
-let lastTimeMs = 0;
-const rate = 1000;
+export interface WorldOptions extends p2.WorldOptions {
+  localServer?: GameServer;
+}
 
 const terraNames = [
   'terrain-21-5',
   'terrain-22-5',
   'terrain-23-5'
-]
+];
 
 const generateTerrainData = () => {
   const place = { col: 0, row: 0 };
@@ -63,14 +63,25 @@ const generateTerrainData = () => {
   })
 }
 
+const fixedTimeStep = 1 / 60;
+const maxSubSteps = 10;
+let lastTimeMs = 0;
+const rate = 1000;
+
 export class GameWorld {
-  public state: GameState;
-  constructor(prevState: GameState, options: p2.WorldOptions = { gravity: [0, 0] }) {
-    this.state = prevState || GameWorld.CreateState(options);
-    // this.state.terrainData = generateTerrainData();
+  static updateWorld: any;
+
+  public updateWorld(worldData: string): void {
+    console.log(worldData);
   }
 
-  public static CreateState(options: p2.WorldOptions = { gravity: [0, 0] }): GameState {
+  public state: GameState;
+  constructor(prevState: GameState, options: WorldOptions = { gravity: [0, 0] }) {
+    this.state = prevState || GameWorld.CreateState(options);
+    this.state.localServer = new GameServer(this.incomingUpdate);
+  }
+
+  public static CreateState(options: WorldOptions = { gravity: [0, 0] }): GameState {
     const state = {
       world: new p2.World(options),
       stage: new PIXI.Container(),
@@ -98,18 +109,18 @@ export class GameWorld {
   }
 
   public create(): void {
-    const { world, terrainLayer, terrainData, stage } = this.state;
+    const { terrainLayer, terrainData, stage } = this.state;
     const { innerWidth, innerHeight } = window;
     const o = {
       x: innerWidth + 1,
       y: innerHeight + 1
     };
-    
-    if(terrainData){
+
+    if (terrainData) {
       const r = new PIXI.Rectangle(0, 0, o.x, o.y);
       terrainData.forEach(({ tile, pos }) => {
         const [x, y] = pos;
-        if (r.contains(x*32, y*32)) {
+        if (r.contains(x * 32, y * 32)) {
           const texture = PIXI.utils.TextureCache[tile] as PIXI.Texture;
           const sprite = PIXI.Sprite.from(texture);
           sprite.position.x = x * 32;
@@ -120,28 +131,7 @@ export class GameWorld {
       stage.addChild(terrainLayer);
     }
 
-    world.addBody(this.addGameObject({
-      options: { mass: 1, position: [-2, 0], fixedRotation: true },
-      extra: { type: 'player', character: 'prince' },
-      shape: new p2.Box({ width: pixelsToMeters(32), height: pixelsToMeters(48) })
-    }));
-
-    world.addBody(this.addGameObject({
-      options: { mass: 1, position: [-2, 6] },
-      extra: { sprite: 'tile_205.png' },
-      shape: new p2.Box({ width: pixelsToMeters(64), height: pixelsToMeters(64) })
-    }));
-
-    // world.addBody(this.addGameObject({
-    //   options: { mass: 0, position: [3, 7], collisionResponse: false },
-    //   extra: { sprite: 'terrain-21-5' },
-    //   shape: new p2.Box({ width: pixelsToMeters(16), height: pixelsToMeters(16) })
-    // }));
-
-    world.addBody(this.addGameObject({
-      options: { position: [0, -10] },
-      shape: new p2.Plane()
-    }))
+    this.state.localServer.start();
   }
 
   public playerControls(player: p2.Body, keydown: Record<string, KeyboardEvent>): void {
@@ -149,7 +139,7 @@ export class GameWorld {
     player.damping = 0.8
     const speed = 30;
     // const turnSpeed = 4;
-    
+
     const keys = Object.keys(keydown);
     if (keys.includes('down')) {
       player.applyForceLocal([0, -speed]);
@@ -172,6 +162,7 @@ export class GameWorld {
     // }
   }
 
+
   public update(timeMill: number): void {
     const { world, keydown } = this.state;
     const [player] = world.bodies.filter((body: GameBody) => body.extra && body.extra.type === 'player');
@@ -184,6 +175,53 @@ export class GameWorld {
     }
     world.step(fixedTimeStep, timeSinceLast, maxSubSteps);
     lastTimeMs = timeMill;
+  }
+
+  public incomingUpdate(packet: string): void {
+    try {
+      const data = JSON.parse(packet);
+      if (data && data.bodies) {
+        this.consumeIncomingUpdates(data.bodies as GameBody[])
+      }
+    }
+    catch (e) {
+      console.error(e);
+    }
+  }
+
+  consumeIncomingUpdates(bodies: GameBody[]): void  {
+    const { world } = this.state;
+    console.log('consumeIncomingUpdates');
+    const findBody = (gameBody: GameBody) => {
+      const result = world.bodies.filter(body => {
+        return body.id === gameBody.id;
+      });
+      return result.length > 0 ? result[0] : null;
+    }
+
+    bodies.forEach(body => {
+      const clientBody = findBody(body);
+      if(clientBody){
+        Object.entries(body).forEach(([key, value]) => {
+          clientBody[key] = value;
+        })
+        // clientBody.velocity = body.velocity;
+        // clientBody.position = body.position;
+        // clientBody.angle = body.angle;
+        // clientBody.angularVelocity = body.angularVelocity;
+        // clientBody.angularDamping = body.angularDamping;
+        // clientBody.angularForce = body.angularForce;
+        // clientBody.damping = body.damping;
+        // clientBody.type = body.type;
+      }
+      else {
+        const incomingBody = new Body();
+        Object.entries(body).forEach(([key, value]) => {
+          incomingBody[key] = value;
+        })
+        world.addBody(incomingBody);
+      }
+    });
   }
 }
 
