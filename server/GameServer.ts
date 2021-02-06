@@ -99,7 +99,7 @@ export class GameServer {
   }
 
   sendPackage(packet: string): void {
-    console.log(packet);
+    // console.log(packet);
     this.sendUpdates(packet);
   }
 }

@@ -78,7 +78,7 @@ export class GameWorld {
   public state: GameState;
   constructor(prevState: GameState, options: WorldOptions = { gravity: [0, 0] }) {
     this.state = prevState || GameWorld.CreateState(options);
-    this.state.localServer = new GameServer(this.incomingUpdate);
+    this.state.localServer = new GameServer(this.incomingUpdate); // local server with an updater hook
   }
 
   public static CreateState(options: WorldOptions = { gravity: [0, 0] }): GameState {
@@ -189,7 +189,7 @@ export class GameWorld {
     }
   }
 
-  consumeIncomingUpdates(bodies: GameBody[]): void  {
+  private consumeIncomingUpdates(bodies: GameBody[]): void  {
     const { world } = this.state;
     console.log('consumeIncomingUpdates');
     const findBody = (gameBody: GameBody) => {

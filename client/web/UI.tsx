@@ -15,13 +15,12 @@ export const UI: React.FunctionComponent = () => {
     });
   }, []);
 
+  console.log('==> Render UI.tsx <==')
+
   return (
     <Router>
-      <Route path="/game">
-        <Game />
-      </Route>
-      <Route exact path="/">
-        <Home { ...{socket, messages, lastupdate} }/>
+      <Route path="/">
+        {/* <Home { ...{socket, messages, lastupdate} }/> */}
       </Route>
     </Router>
   )

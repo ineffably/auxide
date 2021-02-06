@@ -56,7 +56,7 @@ export class GameWorld {
     const { world } = this.state;
     let timeSinceLast = 0;
     if(timeMill !== undefined && lastTimeMs !== undefined){
-        timeSinceLast = (timeMill - lastTimeMs) / rate;
+      timeSinceLast = (timeMill - lastTimeMs) / rate;
     }
     world.step(fixedTimeStep, timeSinceLast, maxSubSteps);
     lastTimeMs = timeMill;    
