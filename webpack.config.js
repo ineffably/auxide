@@ -11,8 +11,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     path: path.join(__dirname, outputDirectory),
-    filename: 'bundle.js',
-    publicPath: assets
+    filename: 'bundle.js'
   },
   module: {
     rules: [

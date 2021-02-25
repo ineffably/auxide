@@ -25,6 +25,7 @@ export interface GameState {
   terrainData?: TerrainData[];
   animations?: Record<string, CharacterAnimation>;
   localServer?: GameServer;
+  idMap?: Record<number, number>;
 }
 
 export interface CreateWorld {
@@ -77,11 +78,14 @@ export class GameWorld {
 
   public state: GameState;
   constructor(prevState: GameState, options: WorldOptions = { gravity: [0, 0] }) {
+    console.log('-- GameWorld Instantiated');
     this.state = prevState || GameWorld.CreateState(options);
-    this.state.localServer = new GameServer(this.incomingUpdate); // local server with an updater hook
+    this.state.localServer = new GameServer((packet: string) => {
+      this.incomingUpdate(packet);
+    }); // local server with an updater hook
   }
 
-  public static CreateState(options: WorldOptions = { gravity: [0, 0] }): GameState {
+  public static CreateState(options: WorldOptions = { gravity: [0, -2] }): GameState {
     const state = {
       world: new p2.World(options),
       stage: new PIXI.Container(),
@@ -97,10 +101,10 @@ export class GameWorld {
     return state;
   }
 
-  public addGameObject({ options, extra, shape }: AddGameObjectParams): GameBody {
+  public addGameObject({ options, extraprops, shape }: AddGameObjectParams): GameBody {
     const body = new p2.Body(options) as GameBody;
-    if (extra) {
-      body.extra = extra;
+    if (extraprops) {
+      body.extra = extraprops;
     }
     if (shape) {
       body.addShape(shape);
@@ -109,7 +113,8 @@ export class GameWorld {
   }
 
   public create(): void {
-    const { terrainLayer, terrainData, stage } = this.state;
+    console.log('-- create');
+    const { terrainLayer, terrainData, stage, localServer } = this.state;
     const { innerWidth, innerHeight } = window;
     const o = {
       x: innerWidth + 1,
@@ -131,7 +136,8 @@ export class GameWorld {
       stage.addChild(terrainLayer);
     }
 
-    this.state.localServer.start();
+    localServer.create();
+    localServer.start();
   }
 
   public playerControls(player: p2.Body, keydown: Record<string, KeyboardEvent>): void {
@@ -179,9 +185,9 @@ export class GameWorld {
 
   public incomingUpdate(packet: string): void {
     try {
-      const data = JSON.parse(packet);
-      if (data && data.bodies) {
-        this.consumeIncomingUpdates(data.bodies as GameBody[])
+      const bodies = JSON.parse(packet);
+      if (bodies) {
+        this.consumeIncomingUpdates(bodies as GameBody[])
       }
     }
     catch (e) {
@@ -189,9 +195,46 @@ export class GameWorld {
     }
   }
 
-  private consumeIncomingUpdates(bodies: GameBody[]): void  {
+  public createBody(incomingBody: GameBody): GameBody {
+    // console.log('velocity', body.velocity);
+    const { extra } = incomingBody;
+    const { options, shapeProps } = incomingBody.createOptions;
+    options.id = incomingBody.id;
+    console.log(incomingBody.shapes[0]);
+    const body = new p2.Body(options) as GameBody;
+    if (extra) {
+      body.extra = extra;
+    }
+    if (shapeProps) {
+      const shapeOptions = shapeProps.options;
+      if(shapeProps.type === 'box') {
+        const bodyShape = shapeOptions ? new p2.Box(shapeOptions) : new p2.Box();
+        body.addShape(bodyShape);
+      }
+      if(shapeProps.type === 'plane') {
+        const bodyShape = shapeOptions ? new p2.Plane(shapeOptions) : new p2.Plane();
+        body.addShape(bodyShape);
+      }
+    }
+    return body;
+  }
+
+  public updateBody(targetBody: GameBody, body: GameBody) {
+    const { velocity, position } = body;
+    targetBody.velocity = [velocity[0], velocity[1]];
+    targetBody.position = [position[0], position[1]];
+    targetBody.angle = body.angle;
+    targetBody.angularVelocity = body.angularVelocity;
+    targetBody.angularDamping = body.angularDamping;
+    targetBody.angularForce = body.angularForce;
+    targetBody.damping = body.damping;
+    // targetBody.type = body.type;
+    // targetBody.extra = body.extra;
+    return targetBody;
+  }
+
+  public consumeIncomingUpdates(bodies: GameBody[]): void  {
     const { world } = this.state;
-    console.log('consumeIncomingUpdates');
     const findBody = (gameBody: GameBody) => {
       const result = world.bodies.filter(body => {
         return body.id === gameBody.id;
@@ -201,25 +244,13 @@ export class GameWorld {
 
     bodies.forEach(body => {
       const clientBody = findBody(body);
-      if(clientBody){
-        Object.entries(body).forEach(([key, value]) => {
-          clientBody[key] = value;
-        })
-        // clientBody.velocity = body.velocity;
-        // clientBody.position = body.position;
-        // clientBody.angle = body.angle;
-        // clientBody.angularVelocity = body.angularVelocity;
-        // clientBody.angularDamping = body.angularDamping;
-        // clientBody.angularForce = body.angularForce;
-        // clientBody.damping = body.damping;
-        // clientBody.type = body.type;
+      if(clientBody) {
+        this.updateBody(clientBody, body);
       }
       else {
-        const incomingBody = new Body();
-        Object.entries(body).forEach(([key, value]) => {
-          incomingBody[key] = value;
-        })
+        const incomingBody = this.createBody(body);
         world.addBody(incomingBody);
+        console.log('incomingBody', incomingBody.id);
       }
     });
   }

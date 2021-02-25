@@ -5,101 +5,152 @@ import { json } from 'express';
 
 function pixelsToMeters(p) { return p * 0.05; }
 
+interface ShapeProps {
+  type: 'box' | 'plane' | 'circle';
+  options?: any;
+}
+
 export interface AddGameBodyParams {
   options: p2.BodyOptions;
   extra?: BodyExtra;
-  shape?: p2.Shape;
+  shapeProps: ShapeProps;
 }
 
 const fixedTimeStep = 1 / 60;
 const maxSubSteps = 10;
-let lastTimeMs = 0;
 const rate = 1000;
-const netTickRate = 50;
+const serverProps = {
+  frame: 0,
+  netTickRate: 60 / 1000,
+  timer: window || new Nanotimer(),
+  lastTimeMs: 0,
+};
 
 export class GameServer {
-  private world = new p2.World({ gravity: [0, 0] })
-  private timer = window || new Nanotimer();
-  private timeSinceLastTick = 0;
+  private world = new p2.World({ gravity: [0, -2] })
+  private timeSinceLastSend = 0;
   sendUpdates: (netPackage: string) => void;
 
   constructor(sendUpdates: (netPackage: string) => void) {
     this.sendUpdates = sendUpdates;
   }
 
+  createShapeFromProps(props: ShapeProps) {
+    const { type, options } = props;
+    if(type === 'box') {
+      return options ? new p2.Box(options) : new p2.Box();
+    }
+    if(type === 'plane') {
+      return options ? new p2.Plane(options) : new p2.Plane();
+    }
+  }
+
   public create(): void {
     const { world } = this;
 
-    // world.addBody(this.addGameObject({
-    //   options: { mass: 1, position: [-2, 0], fixedRotation: true },
-    //   extra: { type: 'player', character: 'prince' },
-    //   shape: new p2.Box({ width: pixelsToMeters(32), height: pixelsToMeters(48) })
-    // }));
-
     world.addBody(this.addGameObject({
-      options: { mass: 1, position: [-2, 6] },
-      extra: { sprite: 'tile_205.png' },
-      shape: new p2.Box({ width: pixelsToMeters(64), height: pixelsToMeters(64) })
+      options: { mass: 1, position: [-2, 0], fixedRotation: true },
+      extra: { type: 'player', character: 'prince' },
+      shapeProps: { type: 'box', options: { width: pixelsToMeters(32), height: pixelsToMeters(48) } }
     }));
 
     world.addBody(this.addGameObject({
-      options: { mass: 1, position: [-2, 8] },
+      options: { mass: 1, position: [-10, -1] },
       extra: { sprite: 'tile_205.png' },
-      shape: new p2.Box({ width: pixelsToMeters(64), height: pixelsToMeters(64) })
+      shapeProps: { type: 'box', options: { width: pixelsToMeters(64), height: pixelsToMeters(64) } }
     }));
 
     world.addBody(this.addGameObject({
-      options: { mass: 1, position: [-4, 6] },
+      options: { mass: 1, position: [-10, -10] },
       extra: { sprite: 'tile_205.png' },
-      shape: new p2.Box({ width: pixelsToMeters(64), height: pixelsToMeters(64) })
+      shapeProps: { type: 'box', options: { width: pixelsToMeters(64), height: pixelsToMeters(64) } }
     }));
 
-    // world.addBody(this.addGameObject({
-    //   options: { position: [0, -10] },
-    //   shape: new p2.Plane()
-    // }))
+    world.addBody(this.addGameObject({
+      options: { mass: 1, position: [-10, -15] },
+      extra: { sprite: 'tile_205.png' },
+      shapeProps: { type: 'box', options: { width: pixelsToMeters(64), height: pixelsToMeters(64) } }
+    }));
+
+    world.addBody(this.addGameObject({
+      options: { position: [0, -20] },
+      shapeProps: { type: 'plane' }
+    }))
   }
 
   public start(): void {
+    console.log('== start');
     this.update(Date.now());
   }
 
-  public addGameObject({ options, extra, shape }: AddGameBodyParams): GameBody {
+  public addGameObject({ options, extra, shapeProps }: AddGameBodyParams): GameBody {
     const body = new p2.Body(options) as GameBody;
     if (extra) {
       body.extra = extra;
     }
-    if (shape) {
-      body.addShape(shape);
+    if (shapeProps) {
+      body.addShape(this.createShapeFromProps(shapeProps));
+    }
+    body.createOptions = {
+      shapeProps,
+      options
     }
     return body;
   }
 
   public update(timeMill: number): void {
     const { world } = this;
-    let timeSinceLast = 0;
+    const { lastTimeMs, netTickRate, timer } = serverProps;
+    let deltaTime = 0;
     if (timeMill !== undefined && lastTimeMs !== undefined) {
-      timeSinceLast = (timeMill - lastTimeMs) / rate;
+      deltaTime = (timeMill - lastTimeMs) / rate;
     }
-    world.step(fixedTimeStep, timeSinceLast, maxSubSteps);
-    lastTimeMs = timeMill;
+    world.step(fixedTimeStep, deltaTime, maxSubSteps);
+    serverProps.lastTimeMs = timeMill;
 
-    const timeToSend = this.timeSinceLastTick > netTickRate;
+    const timeToSend = this.timeSinceLastSend > netTickRate;
     if (timeToSend) {
       this.sendWorldDataToClients(world);
-      this.timeSinceLastTick = 0;
+      this.timeSinceLastSend = 0;
     }
-    this.timer.setTimeout(() => this.update(Date.now()));
+    else {
+      this.timeSinceLastSend += deltaTime;
+    }
+    serverProps.frame++;
+    if(serverProps.frame < 10){
+      timer.setTimeout(() => this.update(Date.now()), 0);
+    }
   }
 
   sendWorldDataToClients(world: p2.World): void {
     const { bodies } = world;
-    const networkPackage = JSON.stringify({ bodies });
-    this.sendPackage(networkPackage);
+    const removeFields = { 
+      world: null, 
+      bodies: null,
+      aabb: null,
+      previousAngle: null,
+      previousPosition: null,
+      inertia: null,
+      vlamda: null,
+      wlamda: null,
+    };
+    const bodiesToSend = bodies.map(body => {
+      const result = Object.assign({}, body, removeFields);
+      result.shapes = result.shapes.map(shape => {
+        shape.body = null;
+        return shape;
+      })
+      console.log(result);
+      return result;
+    })
+    // console.log(bodiesToSend[0], JSON.stringify(bodiesToSend[0]).length);
+    const pack = JSON.stringify(bodiesToSend);
+    this.sendPackage(pack);
   }
 
   sendPackage(packet: string): void {
-    // console.log(packet);
+    console.log(packet.length);
+    console.log(packet);
     this.sendUpdates(packet);
   }
 }

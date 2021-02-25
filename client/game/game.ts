@@ -33,6 +33,7 @@ const localState = {
 }
 
 async function init(): Promise<void> {
+  console.log('== init');
   const state = GameWorld.CreateState();
   localState.loader = await load(state);
   const gameWorld = new GameWorld(state);

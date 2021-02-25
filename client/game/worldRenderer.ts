@@ -119,6 +119,7 @@ export function renderer({
   world.bodies.forEach((body: GameBody) => {
     if(!body.extra) return;
     const { extra, id, velocity } = body;
+    // console.log(velocity);
     const { sprite, type, character } = extra;
     const [vx, vy] = velocity;
 

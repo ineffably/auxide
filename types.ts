@@ -18,6 +18,7 @@ export interface GameObject {
 
 export interface GameBody extends p2.Body {
   extra?: BodyExtra;
+  createOptions?: {options?: any, shapeProps?: any};
 }
 
 export interface BodyExtra {
@@ -28,7 +29,7 @@ export interface BodyExtra {
 
 export interface AddGameObjectParams {
   options: p2.BodyOptions;
-  extra?: BodyExtra;
+  extraprops?: BodyExtra;
   shape?: p2.Shape;
 }
 
