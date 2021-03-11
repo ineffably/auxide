@@ -1,6 +1,6 @@
 import p2 from 'p2';
 import { GameBody } from '../../types';
-import { Sprite, Spritesheet, Container, IResourceDictionary, utils, Rectangle, AnimatedSprite } from 'pixi.js';
+import { Sprite, Spritesheet, Container, IResourceDictionary, utils, Rectangle, AnimatedSprite, TilingSprite } from 'pixi.js';
 import { TerrainData, GameState } from './GameWorld';
 import { CharacterAnimation } from './assetLoader';
 
@@ -24,7 +24,7 @@ export const getTexture = (name: string, spritesheets: Spritesheet[]): PIXI.Text
   return sheets[0] && sheets[0].textures[name];
 }
 
-const setSpritePosition = (sprite: Sprite | AnimatedSprite, body: p2.Body, camera: PIXI.Rectangle) => {
+const setSpritePosition = (sprite: Sprite | AnimatedSprite | TilingSprite, body: p2.Body, camera: PIXI.Rectangle, type?: string) => {
   sprite.position.x = -metersToPixels(body.interpolatedPosition[0]) - camera.x;
   sprite.position.y = -metersToPixels(body.interpolatedPosition[1]) - camera.y;
   sprite.rotation = body.interpolatedAngle;
@@ -37,15 +37,22 @@ interface GetSpriteParams {
   stage: Container;
   sprites: Record<string, Sprite>;
   zIndex: number;
+  isTiled: boolean;
 }
 
-const getSprite = ({ clientState: state, id, sprite, sprites, stage, zIndex }: GetSpriteParams) => {
+const getSprite = ({ clientState: state, id, sprite, sprites, stage, zIndex, isTiled }: GetSpriteParams): Sprite => {
   let returnSprite = state.sprites[id];
   if (!returnSprite) {
     const texture = utils.TextureCache[sprite];
     if (texture) {
-      returnSprite = new Sprite(texture);
-      returnSprite.anchor.set(0.5);
+      if(isTiled) {
+        returnSprite = new TilingSprite(texture);
+        returnSprite.anchor.set(0);
+      }
+      else {
+        returnSprite = new Sprite(texture);
+        returnSprite.anchor.set(0.5);
+      }
       returnSprite.zIndex = zIndex;
     }
     sprites[id] = returnSprite;
@@ -119,17 +126,26 @@ export function renderer({
   world.bodies.forEach((body: GameBody) => {
     if(!body.extra) return;
     const { extra, id, velocity } = body;
-    // console.log(velocity);
     const { sprite, type, character } = extra;
     const [vx, vy] = velocity;
 
     if (sprite) {
       const zIndex = body.mass === 0 ? -100 : type === 'player' ? 100 : 0;
-      const gameSprite = getSprite({ clientState, id, sprite, stage, sprites, zIndex });
+      const gameSprite = getSprite({ clientState, id, sprite, stage, sprites, zIndex, isTiled: type === 'plane' });
       if (body.mass === 0) {
         gameSprite.zIndex = -100;
       }
-      setSpritePosition(gameSprite, body, camera);
+      if(type !== 'plane') {
+        setSpritePosition(gameSprite, body, camera, type);
+      }
+      else {
+        const tiledSprite = getSprite({ clientState, id, sprite, stage, sprites, zIndex, isTiled: true });
+        tiledSprite.width = 20000;
+        setSpritePosition(tiledSprite, body, camera, type);
+        // tiledSprite.position.y = -camera.y - (innerHeight/2);
+        console.log(body.interpolatedPosition[1], Math.floor(tiledSprite.position.y));
+      }
+
     }
 
     if (character && animations) {

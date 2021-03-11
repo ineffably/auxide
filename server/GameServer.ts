@@ -1,7 +1,7 @@
 import p2 from 'p2';
 import { GameBody, BodyExtra } from '../types';
 import Nanotimer from 'nanotimer';
-import { json } from 'express';
+// import { Game } from '../client/web/Game';
 
 function pixelsToMeters(p) { return p * 0.05; }
 
@@ -27,7 +27,7 @@ const serverProps = {
 };
 
 export class GameServer {
-  private world = new p2.World({ gravity: [0, -2] })
+  private world = new p2.World({ gravity: [0, -10] })
   private timeSinceLastSend = 0;
   sendUpdates: (netPackage: string) => void;
 
@@ -35,7 +35,7 @@ export class GameServer {
     this.sendUpdates = sendUpdates;
   }
 
-  createShapeFromProps(props: ShapeProps) {
+  createShapeFromProps(props: ShapeProps): p2.Shape | undefined {
     const { type, options } = props;
     if(type === 'box') {
       return options ? new p2.Box(options) : new p2.Box();
@@ -56,26 +56,27 @@ export class GameServer {
 
     world.addBody(this.addGameObject({
       options: { mass: 1, position: [-10, -1] },
-      extra: { sprite: 'tile_205.png' },
+      extra: { sprite: 'tile_205.png', type: 'rect' },
       shapeProps: { type: 'box', options: { width: pixelsToMeters(64), height: pixelsToMeters(64) } }
     }));
 
     world.addBody(this.addGameObject({
       options: { mass: 1, position: [-10, -10] },
-      extra: { sprite: 'tile_205.png' },
+      extra: { sprite: 'tile_205.png', type: 'rect' },
       shapeProps: { type: 'box', options: { width: pixelsToMeters(64), height: pixelsToMeters(64) } }
     }));
 
     world.addBody(this.addGameObject({
       options: { mass: 1, position: [-10, -15] },
-      extra: { sprite: 'tile_205.png' },
+      extra: { sprite: 'tile_205.png', type: 'rect'},
       shapeProps: { type: 'box', options: { width: pixelsToMeters(64), height: pixelsToMeters(64) } }
     }));
 
     world.addBody(this.addGameObject({
-      options: { position: [0, -20] },
+      options: { position: [100, -50] },
+      extra: { type: 'plane', sprite: 'tile_331.png' },
       shapeProps: { type: 'plane' }
-    }))
+    }));
   }
 
   public start(): void {
@@ -89,7 +90,10 @@ export class GameServer {
       body.extra = extra;
     }
     if (shapeProps) {
-      body.addShape(this.createShapeFromProps(shapeProps));
+      const shape = this.createShapeFromProps(shapeProps);
+      if(shape) {
+        body.addShape(shape);
+      }
     }
     body.createOptions = {
       shapeProps,
@@ -105,10 +109,12 @@ export class GameServer {
     if (timeMill !== undefined && lastTimeMs !== undefined) {
       deltaTime = (timeMill - lastTimeMs) / rate;
     }
-    world.step(fixedTimeStep, deltaTime, maxSubSteps);
+    // world.step(fixedTimeStep, deltaTime, maxSubSteps);
+    world.step(fixedTimeStep);
     serverProps.lastTimeMs = timeMill;
 
     const timeToSend = this.timeSinceLastSend > netTickRate;
+    // console.log(timeToSend);
     if (timeToSend) {
       this.sendWorldDataToClients(world);
       this.timeSinceLastSend = 0;
@@ -117,9 +123,7 @@ export class GameServer {
       this.timeSinceLastSend += deltaTime;
     }
     serverProps.frame++;
-    if(serverProps.frame < 10){
-      timer.setTimeout(() => this.update(Date.now()), 0);
-    }
+    timer.setTimeout(() => this.update(Date.now()), 0);
   }
 
   sendWorldDataToClients(world: p2.World): void {
@@ -140,7 +144,7 @@ export class GameServer {
         shape.body = null;
         return shape;
       })
-      console.log(result);
+      // console.log(result);
       return result;
     })
     // console.log(bodiesToSend[0], JSON.stringify(bodiesToSend[0]).length);
@@ -149,8 +153,8 @@ export class GameServer {
   }
 
   sendPackage(packet: string): void {
-    console.log(packet.length);
-    console.log(packet);
+    // console.log(packet.length);
+    // console.log(packet);
     this.sendUpdates(packet);
   }
 }

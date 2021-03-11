@@ -73,11 +73,11 @@ export class GameWorld {
   static updateWorld: any;
 
   public updateWorld(worldData: string): void {
-    console.log(worldData);
+    // console.log(worldData);
   }
 
   public state: GameState;
-  constructor(prevState: GameState, options: WorldOptions = { gravity: [0, 0] }) {
+  constructor(prevState: GameState, options: WorldOptions = { gravity: [0, -10] }) {
     console.log('-- GameWorld Instantiated');
     this.state = prevState || GameWorld.CreateState(options);
     this.state.localServer = new GameServer((packet: string) => {
@@ -85,7 +85,7 @@ export class GameWorld {
     }); // local server with an updater hook
   }
 
-  public static CreateState(options: WorldOptions = { gravity: [0, -2] }): GameState {
+  public static CreateState(options: WorldOptions = { gravity: [0, -10] }): GameState {
     const state = {
       world: new p2.World(options),
       stage: new PIXI.Container(),
@@ -200,7 +200,7 @@ export class GameWorld {
     const { extra } = incomingBody;
     const { options, shapeProps } = incomingBody.createOptions;
     options.id = incomingBody.id;
-    console.log(incomingBody.shapes[0]);
+    console.log('=== createBody', incomingBody.shapes[0]);
     const body = new p2.Body(options) as GameBody;
     if (extra) {
       body.extra = extra;
@@ -219,7 +219,8 @@ export class GameWorld {
     return body;
   }
 
-  public updateBody(targetBody: GameBody, body: GameBody) {
+  public updateBody(targetBody: GameBody, body: GameBody): GameBody {
+    // console.log('updatebody');
     const { velocity, position } = body;
     targetBody.velocity = [velocity[0], velocity[1]];
     targetBody.position = [position[0], position[1]];

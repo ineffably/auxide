@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { UI } from './web/UI';
-import { init } from './game/game';
 
 declare global {
   // eslint-disable-next-line no-var 
@@ -15,7 +14,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-document.getElementById('root').style.display = 'none';
+// document.getElementById('root').style.display = 'none';
 document.getElementById('game').style.display = 'block';
-console.log('useEffect Game.tsx');
-init();

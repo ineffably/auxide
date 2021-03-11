@@ -25,7 +25,7 @@ const rate = 1000;
 
 export class GameWorld {
   state: GameState;
-  constructor(options: p2.WorldOptions = {gravity: [0, 0]}){
+  constructor(options: p2.WorldOptions = {gravity: [0, 0]}) {
     this.state = {
       world: new p2.World(options),
       stage: new PIXI.Container(),
