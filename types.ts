@@ -17,7 +17,20 @@ export interface GameObject {
 }
 
 export interface GameBody extends p2.Body {
-  extra?: any;
+  extra?: BodyExtra;
+  createOptions?: {options?: any, shapeProps?: any};
+}
+
+export interface BodyExtra {
+  sprite?: string; 
+  type?: string;
+  character?: string;
+}
+
+export interface AddGameObjectParams {
+  options: p2.BodyOptions;
+  extraprops?: BodyExtra;
+  shape?: p2.Shape;
 }
 
 export interface SpriteSheet {
@@ -59,3 +72,4 @@ export interface Meta {
   scale?:       string;
   smartupdate?: string;
 }
+

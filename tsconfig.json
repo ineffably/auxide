@@ -19,5 +19,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
 	},
-	"include": [ "./client/**/*.ts" ],
+	"include": [ 
+    "./client/**/*.ts", "./client/**/*.tsx" 
+  ],
 }
